@@ -1,4 +1,4 @@
 package spengergasse.at.ultiport.entities;
 
-public class Anforderer implements IUser {
+public class Anforderer extends User{
 }

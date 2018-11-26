@@ -44,6 +44,7 @@
         android:layout_marginEnd="149dp"
         android:layout_marginRight="149dp"
         android:layout_marginBottom="87dp"
+        android:onClick="loginClick"
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
