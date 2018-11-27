@@ -27,5 +27,7 @@ public class Raum {
         return raumOE;
     }
 
-   
+    public void setRaumOE(Organsationseinheit raumOE) {
+        this.raumOE = raumOE;
+    }
 }
