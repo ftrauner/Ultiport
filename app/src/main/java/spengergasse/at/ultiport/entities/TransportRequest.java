@@ -3,9 +3,10 @@ package spengergasse.at.ultiport.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.util.ArrayList;
 import java.util.Date;
+
+
 
 public class TransportRequest implements Parcelable {
 
@@ -17,9 +18,12 @@ public class TransportRequest implements Parcelable {
 
     public static ArrayList<TransportRequest> requests = new ArrayList<TransportRequest>();
 
+
+
     public TransportRequest(String reqText, Date reqTime) {
         this.reqText = reqText;
         this.reqTime = reqTime;
+
     }
 
     public TransportRequest(Parcel in) {
