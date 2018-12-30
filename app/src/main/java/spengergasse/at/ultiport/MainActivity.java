@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         rvRequests.setAdapter(requestsAdapter);
         rvRequests.setLayoutManager(new LinearLayoutManager(this));
 
+
+
     }
 
     public void createReqClick(View view){
