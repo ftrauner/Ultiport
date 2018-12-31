@@ -24,7 +24,7 @@ public class LoginActivity extends Activity {
     EditText name, password;
     String Name, Password;
     Context ctx = this;
-    String NAME = null, PASSWORD = null;
+    String NAME = null, PASSWORD = null, GRUPPE = null, VORNAME = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,27 +90,41 @@ public class LoginActivity extends Activity {
             try {
                 JSONObject root = new JSONObject(s);
                 JSONObject user_data = root.getJSONObject("user_data");
-                NAME = user_data.getString("name");
-                PASSWORD = user_data.getString("password");
+                NAME = user_data.getString("e_name");
+                GRUPPE = user_data.getString("e_g_gruppe");
+                VORNAME = user_data.getString("e_vorname");
 
             } catch (JSONException e) {
                 e.printStackTrace();
                 err = "Exception: " + e.getMessage();
             }
 
-            Intent i = new Intent(ctx, MainActivity.class);
-            i.putExtra("name", NAME);
-            i.putExtra("password", PASSWORD);
+            Intent ara = new Intent(ctx, AddRequestActivity.class);
+            Intent ma = new Intent(ctx, MainActivity.class);
+            //Intent admin = new Intent(ctx,)
+            
+            if (!s.equals("{\"user_data\":[]}")) {
 
-            i.putExtra("err", err);
+            /*
+            1...Admin
+            2...Requester
+            3...Transporteur
+             */
 
-            if (!s.equals("{\"user_data\":[]}") ) {
-                System.out.println(s);
-                startActivity(i);
+            if (GRUPPE.equals("1")){
+                //TODO Klasse Admin muss noch implementiert werden
+            }
+
+            else if(GRUPPE.equals("2")){
+                startActivity(ara);
+            }
+
+            else if(GRUPPE.equals("3")){
+                startActivity(ma);
+            }
 
             } else {
-                Toast.makeText(getApplicationContext(), "Falsch!", Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getApplicationContext(), "FALSCH", Toast.LENGTH_LONG).show();
             }
 
         }
