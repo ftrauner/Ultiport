@@ -24,7 +24,7 @@ public class LoginActivity extends Activity {
     EditText name, password;
     String Name, Password;
     Context ctx = this;
-    String NAME = null, PASSWORD = null, GRUPPE = null, VORNAME = null;
+    String NAME = null, GRUPPE = null, VORNAME = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +99,10 @@ public class LoginActivity extends Activity {
                 err = "Exception: " + e.getMessage();
             }
 
-            Intent ara = new Intent(ctx, AddRequestActivity.class);
+            Intent sra = new Intent(ctx,SetRequestActivity.class);
             Intent ma = new Intent(ctx, MainActivity.class);
             //Intent admin = new Intent(ctx,)
-            
+
             if (!s.equals("{\"user_data\":[]}")) {
 
             /*
@@ -116,7 +116,7 @@ public class LoginActivity extends Activity {
             }
 
             else if(GRUPPE.equals("2")){
-                startActivity(ara);
+                startActivity(sra);
             }
 
             else if(GRUPPE.equals("3")){
