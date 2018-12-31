@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,6 +13,7 @@
         android:onClick="onAddUserClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/admin_add_user"
         app:srcCompat="@drawable/ic_add" />
 
     <ImageButton
@@ -25,6 +24,7 @@
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonAdd"
+        android:contentDescription="@string/admin_remove_user"
         app:srcCompat="@drawable/ic_delete" />
 
     <ImageButton
@@ -36,6 +36,7 @@
         android:onClick="onEditUserClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttondelete"
+        android:contentDescription="@string/admin_edit_user"
         app:srcCompat="@drawable/ic_edit" />
 
     <android.support.v7.widget.RecyclerView

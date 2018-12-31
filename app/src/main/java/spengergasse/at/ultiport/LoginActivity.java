@@ -1,15 +1,14 @@
 package spengergasse.at.ultiport;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,19 +19,20 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
+
     EditText name, password;
     String Name, Password;
     Context ctx = this;
-      String NAME = null, GRUPPE = null, VORNAME = null;
+    String NAME = null, GRUPPE = null, VORNAME = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        name = (EditText) findViewById(R.id.nameText);
-        password = (EditText) findViewById(R.id.passwortText);
+        name = findViewById(R.id.nameText);
+        password = findViewById(R.id.passwortText);
     }
 
     public void main_login(View v) {
@@ -50,7 +50,7 @@ public class LoginActivity extends Activity {
             String name = params[0];
             String password = params[1];
 
-            String data = "";
+            StringBuilder data = new StringBuilder();
             int tmp;
 
             try {
@@ -67,12 +67,12 @@ public class LoginActivity extends Activity {
                 os.close();
                 InputStream is = httpURLConnection.getInputStream();
                 while ((tmp = is.read()) != -1) {
-                    data += (char) tmp;
+                    data.append((char) tmp);
                 }
                 is.close();
                 httpURLConnection.disconnect();
 
-                return data;
+                return data.toString();
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -96,15 +96,16 @@ public class LoginActivity extends Activity {
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                err = "Exception: " + e.getMessage();
             }
 
             Intent ma = new Intent(ctx, MainActivity.class);
             //Intent admin = new Intent(ctx,)
 
+            //Bedingung: Erhaltenes JSON-Objekt ist nicht leer
             if (!s.equals("{\"user_data\":[]}")) {
-
+                //Übergebe Nutzergruppe
                 ma.putExtra("userGruppe",GRUPPE);
+                //Starte MainActivity
                 startActivity(ma);
             /*
             1...Admin
@@ -112,7 +113,7 @@ public class LoginActivity extends Activity {
             3...Transporteur
 
             if (GRUPPE.equals("1")){
-                //TODO Klasse Admin muss noch implementiert werden
+
             }
 
             else if(GRUPPE.equals("2")){
@@ -124,7 +125,8 @@ public class LoginActivity extends Activity {
             }
         */
             } else {
-                Toast.makeText(getApplicationContext(), "FALSCH", Toast.LENGTH_LONG).show();
+                //Nachricht wenn Eingabedaten falsch
+                Snackbar.make(findViewById(R.id.login_layout), R.string.login_falsch, Snackbar.LENGTH_SHORT).show();
             }
 
         }

@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name" translatable="false">Ultiport</string>
-    <string name="laborprobe">Laborprobe</string>
-    <string name="patient">Patient</string>
-    <string name="bett">Bett</string>
+    <string name="toolbar_add_request">Anfrage hinzufügen</string>
+    <string name="toolbar_administration">Benutzerverwaltung</string>
+    <string name="login_username">Benutzername</string>
+    <string name="logo_ultiport">Logo Ultiport</string>
+    <string name="logo_parabel">Logo Parabel</string>
+    <string name="login_passwort">Passwort</string>
+    <string name="login_click">Einloggen</string>
+    <string name="add_request_label">Transportanfrage erstellen</string>
+    <string name="add_user_label">Benutzer erstellen</string>
+    <string name="edit_user_label">Benutzer bearbeiten</string>
+    <string name="administration_label">Benutzerverwaltung</string>
+    <string name="login_falsch">Falsche Anmeldedaten</string>
+    <string name="main_keine_berechtigung">Keine Berechtigung</string>
+    <string name="admin_edit_user">Benutzer bearbeiten</string>
+    <string name="admin_remove_user">Benutzer entfernen</string>
+    <string name="admin_add_user">Benutzer hinzufügen</string>
 </resources>

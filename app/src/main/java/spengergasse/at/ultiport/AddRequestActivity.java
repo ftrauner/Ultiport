@@ -16,6 +16,7 @@ public class AddRequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_request);
+
     }
 
     public void addReqClick(View view){
