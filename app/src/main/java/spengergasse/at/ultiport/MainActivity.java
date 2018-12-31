@@ -13,7 +13,6 @@ import spengergasse.at.ultiport.entities.TransportRequest;
 public class MainActivity extends AppCompatActivity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +28,15 @@ public class MainActivity extends AppCompatActivity {
         rvRequests.setAdapter(requestsAdapter);
         rvRequests.setLayoutManager(new LinearLayoutManager(this));
 
+        Intent intentLogIn = getIntent();
+        String gruppe = intentLogIn.getStringExtra("userGruppe");
 
 
     }
 
-    public void createReqClick(View view){
-        Intent intent = new Intent(this,AddRequestActivity.class);
+
+    public void createReqClick(View view) {
+        Intent intent = new Intent(this, AddRequestActivity.class);
         startActivity(intent);
     }
 }

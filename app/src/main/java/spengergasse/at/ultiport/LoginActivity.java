@@ -24,7 +24,7 @@ public class LoginActivity extends Activity {
     EditText name, password;
     String Name, Password;
     Context ctx = this;
-    String NAME = null, GRUPPE = null, VORNAME = null;
+      String NAME = null, GRUPPE = null, VORNAME = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,30 +99,30 @@ public class LoginActivity extends Activity {
                 err = "Exception: " + e.getMessage();
             }
 
-            Intent sra = new Intent(ctx,SetRequestActivity.class);
             Intent ma = new Intent(ctx, MainActivity.class);
             //Intent admin = new Intent(ctx,)
 
             if (!s.equals("{\"user_data\":[]}")) {
 
+                ma.putExtra("userGruppe",GRUPPE);
+                startActivity(ma);
             /*
             1...Admin
             2...Requester
             3...Transporteur
-             */
 
             if (GRUPPE.equals("1")){
                 //TODO Klasse Admin muss noch implementiert werden
             }
 
             else if(GRUPPE.equals("2")){
-                startActivity(sra);
+                startActivity(ara);
             }
 
             else if(GRUPPE.equals("3")){
                 startActivity(ma);
             }
-
+        */
             } else {
                 Toast.makeText(getApplicationContext(), "FALSCH", Toast.LENGTH_LONG).show();
             }
