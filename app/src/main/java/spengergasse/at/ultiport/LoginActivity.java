@@ -99,12 +99,14 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             Intent ma = new Intent(ctx, MainActivity.class);
+
             //Intent admin = new Intent(ctx,)
 
             //Bedingung: Erhaltenes JSON-Objekt ist nicht leer
             if (!s.equals("{\"user_data\":[]}")) {
                 //Übergebe Nutzergruppe
                 ma.putExtra("userGruppe",GRUPPE);
+
                 //Starte MainActivity
                 startActivity(ma);
             /*

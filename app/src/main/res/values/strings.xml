@@ -27,4 +27,10 @@
     <string name="add_user_vorname">Vorname (Zeichenfolge, bis zu 45 Zeichen)</string>
     <string name="add_user_passwort">Passwort (Zeichenfolge, bis zu 8 Zeichen)</string>
     <string name="add_user_button">Erstellen</string>
+
+    <string-array name="numbers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>
