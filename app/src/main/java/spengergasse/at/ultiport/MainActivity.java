@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        //
+        //Berechtigungen werden überprüft
         switch (item.getItemId()) {
             case R.id.action_add_request: {
                 if (userGruppe.equals("1") || userGruppe.equals("2")) {

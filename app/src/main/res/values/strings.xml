@@ -16,4 +16,7 @@
     <string name="admin_edit_user">Benutzer bearbeiten</string>
     <string name="admin_remove_user">Benutzer entfernen</string>
     <string name="admin_add_user">Benutzer hinzufügen</string>
+    <string name="toolbar_add_user">Benutzer hinzufügen</string>
+    <string name="toolbar_edit_user">Benutzer bearbeiten</string>
+    <string name="toolbar_delete_user">Benutzer löschen</string>
 </resources>
