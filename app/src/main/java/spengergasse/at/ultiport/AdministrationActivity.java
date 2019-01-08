@@ -22,11 +22,14 @@ public class AdministrationActivity extends AppCompatActivity {
         }
 
         RecyclerView bView = findViewById(R.id.userList);
+        //TODO: Hier Liste von Usern von DB einfügen
+        //UserAdapter userAdapter = new UserAdapter(***userliste***);
+        //bView.setAdapter(userAdapter);
+        //bView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     /**
      * Methode zum Erstellen des Menüs wie definiert in res/menu/toolbar_administration.xml
-     *
      * @param menu Menü
      * @return wahr
      */
@@ -36,10 +39,8 @@ public class AdministrationActivity extends AppCompatActivity {
         return true;
     }
 
-
     /**
      * Methode für Menüpunkte
-     *
      * @param item Geklickter Menüpunkt
      * @return wahr
      */

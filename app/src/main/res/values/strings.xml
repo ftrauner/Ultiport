@@ -19,4 +19,12 @@
     <string name="toolbar_add_user">Benutzer hinzufügen</string>
     <string name="toolbar_edit_user">Benutzer bearbeiten</string>
     <string name="toolbar_delete_user">Benutzer löschen</string>
+    <string name="add_request_beschreibung">Beschreibung</string>
+    <string name="add_request_button">Erstellen</string>
+    <string name="add_user_id">ID des Benutzers (Zahl, bis zu 20-stellig)</string>
+    <string name="add_user_username">Benutzername (Zeichenfolge, bis zu 8 Zeichen)</string>
+    <string name="add_user_nachname">Nachname (Zeichenfolge, bis zu 45 Zeichen)</string>
+    <string name="add_user_vorname">Vorname (Zeichenfolge, bis zu 45 Zeichen)</string>
+    <string name="add_user_passwort">Passwort (Zeichenfolge, bis zu 8 Zeichen)</string>
+    <string name="add_user_button">Erstellen</string>
 </resources>
