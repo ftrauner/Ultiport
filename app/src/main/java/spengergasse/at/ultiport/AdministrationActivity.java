@@ -3,10 +3,14 @@ package spengergasse.at.ultiport;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import spengergasse.at.ultiport.adapter.UserAdapter;
+import spengergasse.at.ultiport.entities.User;
 
 public class AdministrationActivity extends AppCompatActivity {
 
@@ -22,6 +26,9 @@ public class AdministrationActivity extends AppCompatActivity {
         }
 
         RecyclerView bView = findViewById(R.id.userList);
+        
+
+        //UserAdapter mAdapter = new UserAdapter()
         //TODO: Hier Liste von Usern von DB einfügen
         //UserAdapter userAdapter = new UserAdapter(***userliste***);
         //bView.setAdapter(userAdapter);
