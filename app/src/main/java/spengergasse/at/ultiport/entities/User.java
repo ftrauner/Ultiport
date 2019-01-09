@@ -7,8 +7,17 @@ public class User {
     private String nachname;
     private String username;
     private String passwort;
-    private int gruppe;
+    private String gruppe;
 
+        public User(){
+
+        }
+
+        public User(String vorname, String nachname, String gruppe){
+            this.vorname = vorname;
+            this.nachname = nachname;
+            this.gruppe = gruppe;
+        }
 
     public int getId() {
         return id;
@@ -50,11 +59,11 @@ public class User {
         this.passwort = passwort;
     }
 
-    public int getGruppe() {
+    public String getGruppe() {
         return gruppe;
     }
 
-    public void setGruppe(int gruppe) {
+    public void setGruppe(String gruppe) {
         this.gruppe = gruppe;
     }
 }

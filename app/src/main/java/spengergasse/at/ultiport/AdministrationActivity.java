@@ -3,16 +3,24 @@ package spengergasse.at.ultiport;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import spengergasse.at.ultiport.adapter.UserAdapter;
 import spengergasse.at.ultiport.entities.User;
 
 public class AdministrationActivity extends AppCompatActivity {
+    private List<User> userList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private UserAdapter uAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +33,30 @@ public class AdministrationActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        RecyclerView bView = findViewById(R.id.userList);
-        
+        RecyclerView bView = (RecyclerView) findViewById(R.id.userList);
+
+        uAdapter = new UserAdapter(userList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        bView.setLayoutManager(mLayoutManager);
+        bView.setItemAnimator(new DefaultItemAnimator());
+        bView.setAdapter(uAdapter);
+
+        getUserData();
 
         //UserAdapter mAdapter = new UserAdapter()
         //TODO: Hier Liste von Usern von DB einfügen
         //UserAdapter userAdapter = new UserAdapter(***userliste***);
         //bView.setAdapter(userAdapter);
         //bView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void getUserData(){
+
+        User user = new User("Noah","Capek","Admin");
+        userList.add(user);
+
+        uAdapter.notifyDataSetChanged();
+
     }
 
     /**

@@ -16,76 +16,50 @@ import spengergasse.at.ultiport.R;
 import spengergasse.at.ultiport.entities.User;
 
 //Adapter-Klasse um Request-Objekte in der Recycler-View (Liste) der MainActivity anzuzeigen
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> {
 
     //Interne User-Liste
     private List<User> mUsers;
 
-    //Konstruktor
-    public UserAdapter(List<User> users) {
-        mUsers = users;
-    }
-
     //Neuerstellung eines ViewHolders für die Liste
-    @NonNull
-    @Override
-    public UserAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //Setze Kontext
-        Context context = parent.getContext();
-        //Setze Layout-Inflater
-        LayoutInflater inflater = LayoutInflater.from(context);
 
-        //Setze View
-        View requestView = inflater.inflate(R.layout.user_item, parent, false);
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView vorname, nachname, gruppe;
 
-        //Rückgabe des ViewHolders mit View als Parameter
-        return new ViewHolder(requestView);
-    }
-
-    //Update des ViewHolders der Liste
-    @Override
-    public void onBindViewHolder(@NonNull UserAdapter.ViewHolder viewHolder, int position) {
-        //Setzte Request-Objekt auf Objekt bei der entsprechenden Positionsnummer in der Liste
-        User user = mUsers.get(position);
-        //Datumsformat, um die Zeit hübsch anzuzeigen
-        DateFormat format = SimpleDateFormat.getTimeInstance();
-
-        //Check zur Vermeidung von NullPointern, weiß nicht ob notwendig
-        if (user != null) {
-            //Setze GUI-Elemente auf Element im Holder
-            TextView vornameView = viewHolder.userVorname;
-            TextView nachnameView = viewHolder.userNachname;
-            vornameView.setText(user.getVorname());
-            nachnameView.setText(user.getNachname());
-            TextView gruppeView = viewHolder.userGruppe;
-            gruppeView.setText(user.getGruppe());
+        public MyViewHolder(View view){
+            super(view);
+            vorname = (TextView) view.findViewById(R.id.user_vorname);
+            nachname = (TextView) view.findViewById(R.id.user_nachname);
+            gruppe = (TextView) view.findViewById(R.id.user_gruppe);
         }
     }
 
-    //Liefert Anzahl der Elemente
+    public UserAdapter(List<User> mUsers){
+        this.mUsers = mUsers;
+    }
+
     @Override
-    public int getItemCount() {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item, parent,false);
+
+        return new MyViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position){
+        User user = mUsers.get(position);
+        holder.vorname.setText(user.getVorname());
+        holder.nachname.setText(user.getNachname());
+        holder.gruppe.setText(user.getGruppe());
+    }
+
+    @Override
+    public int getItemCount(){
         return mUsers.size();
     }
 
-    //Klasse zur Definition der Anzeige-Elemente in der Liste, durch die die Daten in der Liste dargestellt werden
-    class ViewHolder extends RecyclerView.ViewHolder {
-        //Textfeld für Vorname
-        TextView userVorname;
-        //Textfeld für Nachname
-        TextView userNachname;
-        //Textfeld für Gruppe
-        TextView userGruppe;
 
-        //Konstruktor
-        ViewHolder(View itemView) {
-            super(itemView);
 
-            //Setze die oben genannten Elemente auf die Layout-Elemente, definiert in res\layout\request_item.xml
-            userVorname = itemView.findViewById(R.id.user_vorname);
-            userNachname = itemView.findViewById(R.id.user_nachname);
-            userGruppe = itemView.findViewById(R.id.user_gruppe);
-        }
-    }
+
 }
 
