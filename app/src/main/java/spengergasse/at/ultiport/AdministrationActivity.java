@@ -11,14 +11,30 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import spengergasse.at.ultiport.adapter.UserAdapter;
 import spengergasse.at.ultiport.entities.User;
+import spengergasse.at.ultiport.persistence.IOERepository;
 
 public class AdministrationActivity extends AppCompatActivity {
-    private List<User> userList = new ArrayList<>();
+
+    private static final String URL_PRODUCTS = "http://ultiport.htl5.org/RetrieveUserData.php";
+
+    RecyclerView bView;
+    private List<User> userList;
     private RecyclerView recyclerView;
     private UserAdapter uAdapter;
 
@@ -33,13 +49,11 @@ public class AdministrationActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        RecyclerView bView = (RecyclerView) findViewById(R.id.userList);
+        bView = findViewById(R.id.userList);
+        bView .setHasFixedSize(true);
+        bView.setLayoutManager(new LinearLayoutManager(this));
 
-        uAdapter = new UserAdapter(userList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        bView.setLayoutManager(mLayoutManager);
-        bView.setItemAnimator(new DefaultItemAnimator());
-        bView.setAdapter(uAdapter);
+        userList = new ArrayList<>();
 
         getUserData();
 
@@ -52,12 +66,48 @@ public class AdministrationActivity extends AppCompatActivity {
 
     private void getUserData(){
 
-        User user = new User("Noah","Capek","Admin");
-        userList.add(user);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_PRODUCTS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            //converting the string to json array object
+                            JSONArray array = new JSONArray(response);
 
-        uAdapter.notifyDataSetChanged();
+                            //traversing through all the object
+                            for (int i = 0; i < array.length(); i++) {
 
+                                //getting product object from json array
+                                JSONObject user = array.getJSONObject(i);
+
+                                //adding the product to product list
+                                userList.add(new User(
+                                        user.getString("e_vorname"),
+                                        user.getString("e_name"),
+                                        user.getString("e_g_gruppe")));
+                            }
+
+                            //creating adapter object and setting it to recyclerview
+                            UserAdapter adapter = new UserAdapter(AdministrationActivity.this,userList);
+                            bView.setAdapter(adapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+
+        //adding our stringrequest to queue
+        Volley.newRequestQueue(this).add(stringRequest);
     }
+
+
 
     /**
      * Methode zum Erstellen des Menüs wie definiert in res/menu/toolbar_administration.xml

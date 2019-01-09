@@ -19,7 +19,13 @@ import spengergasse.at.ultiport.entities.User;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> {
 
     //Interne User-Liste
+    private Context mCtx;
     private List<User> mUsers;
+
+    public UserAdapter(Context mCtx, List<User> mUsers){
+        this.mCtx = mCtx;
+        this.mUsers = mUsers;
+    }
 
     //Neuerstellung eines ViewHolders für die Liste
 
