@@ -22,9 +22,10 @@ import java.net.URL;
 
 public class AddUserActivity extends AppCompatActivity  {
 
-    EditText id, name, password, vorname, benutzername;
+    EditText  name, password, vorname, benutzername;
     Spinner gruppe;
-    String Name, Id, Password, Vorname, Benutzername, Gruppe;
+    String Name, Password, Vorname, Benutzername, Gruppe;
+    //int Id;
     Context ctx=this;
 
 
@@ -41,7 +42,7 @@ public class AddUserActivity extends AppCompatActivity  {
         spinner.setAdapter(adapter);
 
 
-        id = (EditText) findViewById(R.id.benutzer_id);
+        //id = (EditText) findViewById(R.id.benutzer_id);
         name = (EditText) findViewById(R.id.benutzer_nachname);
         password = (EditText) findViewById(R.id.benutzer_passwort);
         vorname = (EditText) findViewById(R.id.benutzer_vorname);
@@ -59,31 +60,32 @@ public class AddUserActivity extends AppCompatActivity  {
 
     public void register_register(View v){
         Name = name.getText().toString();
-        Id = id.getText().toString();
+        //Id = Integer.parseInt(id.getText().toString());
+        //Id = id.getText().toString();
         Password = password.getText().toString();
         Vorname = vorname.getText().toString();
         Benutzername = benutzername.getText().toString();
         Gruppe = gruppe.getSelectedItem().toString();
         BackGround b = new BackGround();
-        b.execute(Name,Id, Password, Vorname,Benutzername,Gruppe);
+        b.execute(Name, Password, Vorname,Benutzername,Gruppe);
     }
 
     class BackGround extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... params) {
-            String id = params[0];
-            String name = params[1];
-            String vorname = params[2];
-            String benutzername = params[3];
-            String password = params[4];
-            String gruppe = params[5];
+            //String id = params[0];
+            String name = params[0];
+            String vorname = params[1];
+            String benutzername = params[2];
+            String password = params[3];
+            String gruppe = params[4];
             String data="";
             int tmp;
 
             try {
                 URL url = new URL("http://ultiport.htl5.org/register.php");
-                String urlParams = "e_id="+id+"&e_name="+name+"&e_vorname="+vorname+"&e_benutzername"+benutzername+"&password"+password+"&e_g_gruppe"+gruppe;
+                String urlParams = "e_name="+name+"&e_vorname="+vorname+"&e_benutzername"+benutzername+"&e_passwort"+password+"&e_g_gruppe"+gruppe;
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
