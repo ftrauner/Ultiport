@@ -61,13 +61,13 @@ public class AddUserActivity extends AppCompatActivity  {
     public void register_register(View v){
         Name = name.getText().toString();
         //Id = Integer.parseInt(id.getText().toString());
-        //Id = id.getText().toString();
+        //Id = id.getText().toString();mat1
         Password = password.getText().toString();
         Vorname = vorname.getText().toString();
         Benutzername = benutzername.getText().toString();
         Gruppe = gruppe.getSelectedItem().toString();
         BackGround b = new BackGround();
-        b.execute(Name, Password, Vorname,Benutzername,Gruppe);
+        b.execute(Name, Vorname,Benutzername,Password,Gruppe);
     }
 
     class BackGround extends AsyncTask<String, String, String> {
@@ -85,7 +85,7 @@ public class AddUserActivity extends AppCompatActivity  {
 
             try {
                 URL url = new URL("http://ultiport.htl5.org/register.php");
-                String urlParams = "e_name="+name+"&e_vorname="+vorname+"&e_benutzername"+benutzername+"&e_passwort"+password+"&e_g_gruppe"+gruppe;
+                String urlParams = "e_name="+name+"&e_vorname="+vorname+"&e_benutzername="+benutzername+"&e_passwort="+password+"&e_g_gruppe="+gruppe;
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
