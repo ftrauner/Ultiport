@@ -45,7 +45,9 @@
         <service
             android:name=".service.RequestIntentService"
             android:exported="false" />
-        <activity android:name=".DeleteUserActivity"></activity>
+        <activity
+            android:name=".DeleteUserActivity"
+            android:label="@string/delete_user_label" />
     </application>
 
 </manifest>

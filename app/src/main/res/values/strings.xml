@@ -29,6 +29,7 @@
     <string name="add_user_button">Erstellen</string>
     <string name="delete_user_id">ID des Benutzers</string>
     <string name="delete_user_button">Löschen</string>
+    <string name="delete_user_label">Benutzer löschen</string>
 
     <string-array name="numbers">
         <item>1</item>
