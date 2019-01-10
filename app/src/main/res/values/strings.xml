@@ -27,6 +27,8 @@
     <string name="add_user_vorname">Vorname (Zeichenfolge, bis zu 45 Zeichen)</string>
     <string name="add_user_passwort">Passwort (Zeichenfolge, bis zu 8 Zeichen)</string>
     <string name="add_user_button">Erstellen</string>
+    <string name="delete_user_id">ID des Benutzers</string>
+    <string name="delete_user_button">Löschen</string>
 
     <string-array name="numbers">
         <item>1</item>

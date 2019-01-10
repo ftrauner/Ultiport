@@ -6,4 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".DeleteUserActivity">
 
+    <EditText
+        android:id="@+id/DeleteUserID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="94dp"
+        android:ems="10"
+        android:hint="@string/delete_user_id"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/DeleteUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="147dp"
+        android:layout_marginLeft="147dp"
+        android:layout_marginTop="286dp"
+        android:text="@string/delete_user_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DeleteUserID" />
 </android.support.constraint.ConstraintLayout>

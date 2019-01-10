@@ -1,7 +1,7 @@
 package spengergasse.at.ultiport;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class DeleteUserActivity extends AppCompatActivity {
 
@@ -9,5 +9,7 @@ public class DeleteUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_user);
+
+
     }
 }
