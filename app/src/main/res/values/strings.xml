@@ -36,4 +36,9 @@
         <item>Requester</item>
         <item>Transporteur</item>
     </string-array>
+
+    <string-array name="ArtDesTransports">
+        <item>Patient</item>
+        <item>Probe</item>
+    </string-array>>
 </resources>
