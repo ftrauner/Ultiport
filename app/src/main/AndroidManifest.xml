@@ -41,6 +41,13 @@
             android:name=".AdministrationActivity"
             android:label="@string/administration_label"
             android:parentActivityName=".MainActivity" />
+
+        <service
+            android:name=".service.RequestIntentService"
+            android:exported="false" />
+        <activity
+            android:name=".DeleteUserActivity"
+            android:label="@string/delete_user_label" />
     </application>
 
 </manifest>
