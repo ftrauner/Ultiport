@@ -11,43 +11,52 @@ import java.util.Date;
 public class TransportRequest implements Parcelable {
 
 
-    // ID des Auftrags, automatisch generiert in DB?
+    // ID des Auftrags, automatisch generiert in DB
     private String reqID;
     //Beschreibung des Auftrags, wird beim Erstellen eingegeben
-    private String reqText;
+    private String reqBeschr;
     //Ersteller des Auftrags, wird mitgespeichert beim Erstellen (aktiver User)
-    private Anforderer reqAnforderer;
+    private User reqAnforderer;
     //Zuständiger Transporteur, ist zunächst null und wird beim Annehmen des Auftrags auf den Trasnporteur gesetzt
-    private Transporteur reqTransporteur;
+    private User reqTransporteur;
     //Datum und Uhrzeit des Erstellens, wird mitgespeichert beim Erstellen
-    private Date reqTime;
+    private Date reqStartZeit;
     //Start-Organisationseinheit beim Erstellen festgelegt
-    private Organsationseinheit reqOEStart;
+    private String reqStartOE;
     //Start-Raum beim Erstellen festgelegt
-    private Raum reqRaumStart;
+    private String reqStartRaum;
     //Ziel-Organisationseinheit beim Erstellen festgelegt
-    private Organsationseinheit reqOETarget;
+    private String reqEndOE;
     //Ziel-Raum beim Erstellen festgelegt
-    private Raum reqRaumTarget;
+    private String reqEndRaum;
 
 
     //Liste speichert alle Aufträge
     public static ArrayList<TransportRequest> requests = new ArrayList<TransportRequest>();
 
 
-    //Normaler Konstruktor TODO: Alle Attribute setzen wenn möglich
-    public TransportRequest(String reqText, Date reqTime) {
-        this.reqText = reqText;
-        this.reqTime = reqTime;
+    //Normaler Konstruktor
 
+
+    public TransportRequest(String reqBeschr, Date reqStartZeit, String reqStartOE, String reqStartRaum, String reqEndOE, String reqEndRaum) {
+        this.reqBeschr = reqBeschr;
+        this.reqStartZeit = reqStartZeit;
+        this.reqStartOE = reqStartOE;
+        this.reqStartRaum = reqStartRaum;
+        this.reqEndOE = reqEndOE;
+        this.reqEndRaum = reqEndRaum;
     }
 
-    //Konstruktor für Parcelable zur Datenübergabe zwischen Activities TODO: Alle Attribute setzen wenn möglich
-    public TransportRequest(Parcel in) {
+    //Konstruktor für Parcelable zur Datenübergabe zwischen Activities
+    private TransportRequest(Parcel in) {
         //Setze Beschreibungs-Text auf eingelesenen String
-        reqText = in.readString();
+        reqBeschr = in.readString();
         //Setze Zeit auf eingelesene Long
-        reqTime = new Date(in.readLong());
+        reqStartZeit = new Date(in.readLong());
+        reqStartOE = in.readString();
+        reqStartRaum = in.readString();
+        reqEndOE = in.readString();
+        reqEndRaum = in.readString();
     }
 
     //Anforderung für Parcelable
@@ -64,6 +73,7 @@ public class TransportRequest implements Parcelable {
     };
 
     //Get & Set
+
     public String getReqID() {
         return reqID;
     }
@@ -72,45 +82,70 @@ public class TransportRequest implements Parcelable {
         this.reqID = reqID;
     }
 
-    public String getReqText() {
-        return reqText;
+    public String getReqBeschr() {
+        return reqBeschr;
     }
 
-    public void setReqText(String reqText) {
-        this.reqText = reqText;
+    public void setReqBeschr(String reqBeschr) {
+        this.reqBeschr = reqBeschr;
     }
 
-    public Anforderer getReqAnforderer() {
+    public User getReqAnforderer() {
         return reqAnforderer;
     }
 
-    public void setReqAnforderer(Anforderer reqAnforderer) {
+    public void setReqAnforderer(User reqAnforderer) {
         this.reqAnforderer = reqAnforderer;
     }
 
-    public Transporteur getReqTransporteur() {
+    public User getReqTransporteur() {
         return reqTransporteur;
     }
 
-    public void setReqTransporteur(Transporteur reqTransporteur) {
+    public void setReqTransporteur(User reqTransporteur) {
         this.reqTransporteur = reqTransporteur;
     }
 
-    public Date getReqTime() {
-        return reqTime;
+    public Date getReqStartZeit() {
+        return reqStartZeit;
     }
 
-    public void setReqTime(Date reqTime) {
-        this.reqTime = reqTime;
+    public void setReqStartZeit(Date reqStartZeit) {
+        this.reqStartZeit = reqStartZeit;
     }
 
-    public static ArrayList<TransportRequest> getRequests() {
-        return requests;
+    public String getReqStartOE() {
+        return reqStartOE;
     }
 
-    public static void setRequests(ArrayList<TransportRequest> requests) {
-        TransportRequest.requests = requests;
+    public void setReqStartOE(String reqStartOE) {
+        this.reqStartOE = reqStartOE;
     }
+
+    public String getReqStartRaum() {
+        return reqStartRaum;
+    }
+
+    public void setReqStartRaum(String reqStartRaum) {
+        this.reqStartRaum = reqStartRaum;
+    }
+
+    public String getReqEndOE() {
+        return reqEndOE;
+    }
+
+    public void setReqEndOE(String reqEndOE) {
+        this.reqEndOE = reqEndOE;
+    }
+
+    public String getReqEndRaum() {
+        return reqEndRaum;
+    }
+
+    public void setReqEndRaum(String reqEndRaum) {
+        this.reqEndRaum = reqEndRaum;
+    }
+
     //Get & Set Ende
 
     //Anforderung für Parcelable
@@ -123,8 +158,8 @@ public class TransportRequest implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         //Übergebe Beschreibungs-Text
-        dest.writeString(this.reqText);
+        dest.writeString(this.reqBeschr);
         //Übergebe Zeit als Long mit getTime(), da Date Datentyp nicht möglich
-        dest.writeLong(this.reqTime.getTime());
+        dest.writeLong(this.reqStartZeit.getTime());
     }
 }
