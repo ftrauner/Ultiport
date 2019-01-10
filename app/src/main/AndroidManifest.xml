@@ -47,7 +47,8 @@
             android:exported="false" />
         <activity
             android:name=".DeleteUserActivity"
-            android:label="@string/delete_user_label" />
+            android:label="@string/delete_user_label"
+            android:parentActivityName=".AdministrationActivity" />
     </application>
 
 </manifest>
