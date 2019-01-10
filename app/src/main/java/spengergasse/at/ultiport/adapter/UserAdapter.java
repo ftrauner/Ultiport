@@ -30,12 +30,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     //Neuerstellung eines ViewHolders für die Liste
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView vorname, nachname, gruppe;
+        public TextView vorname, nachname, gruppe, id;
 
         public MyViewHolder(View view){
             super(view);
             vorname = (TextView) view.findViewById(R.id.user_vorname);
             nachname = (TextView) view.findViewById(R.id.user_nachname);
+            id = (TextView) view.findViewById(R.id.u_id);
             gruppe = (TextView) view.findViewById(R.id.user_gruppe);
         }
     }
@@ -56,6 +57,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         User user = mUsers.get(position);
         holder.vorname.setText(user.getVorname());
         holder.nachname.setText(user.getNachname());
+        holder.id.setText(user.getId());
         holder.gruppe.setText(user.getGruppe());
     }
 

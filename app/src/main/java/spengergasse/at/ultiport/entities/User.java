@@ -2,7 +2,7 @@ package spengergasse.at.ultiport.entities;
 
 public class User {
 
-    private int id;
+    private String id;
     private String vorname;
     private String nachname;
     private String username;
@@ -13,17 +13,18 @@ public class User {
 
         }
 
-        public User(String vorname, String nachname, String gruppe){
+        public User(String vorname, String nachname, String gruppe, String id){
             this.vorname = vorname;
             this.nachname = nachname;
+            this.id = id;
             this.gruppe = gruppe;
         }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

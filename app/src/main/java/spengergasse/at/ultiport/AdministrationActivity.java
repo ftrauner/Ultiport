@@ -1,5 +1,6 @@
 package spengergasse.at.ultiport;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -29,9 +32,12 @@ import spengergasse.at.ultiport.adapter.UserAdapter;
 import spengergasse.at.ultiport.entities.User;
 import spengergasse.at.ultiport.persistence.IOERepository;
 
+
 public class AdministrationActivity extends AppCompatActivity {
 
     private static final String URL_PRODUCTS = "http://ultiport.htl5.org/RetrieveUserData.php";
+
+    Context ctx;
 
     RecyclerView bView;
     private List<User> userList;
@@ -50,7 +56,7 @@ public class AdministrationActivity extends AppCompatActivity {
         }
 
         bView = findViewById(R.id.userList);
-        bView .setHasFixedSize(true);
+        bView.setHasFixedSize(true);
         bView.setLayoutManager(new LinearLayoutManager(this));
 
         userList = new ArrayList<>();
@@ -58,11 +64,12 @@ public class AdministrationActivity extends AppCompatActivity {
         getUserData();
 
         //UserAdapter mAdapter = new UserAdapter()
-        //TODO: Hier Liste von Usern von DB einfügen
         //UserAdapter userAdapter = new UserAdapter(***userliste***);
         //bView.setAdapter(userAdapter);
         //bView.setLayoutManager(new LinearLayoutManager(this));
     }
+
+
 
     private void getUserData(){
 
@@ -84,11 +91,13 @@ public class AdministrationActivity extends AppCompatActivity {
                                 userList.add(new User(
                                         user.getString("e_vorname"),
                                         user.getString("e_name"),
-                                        user.getString("e_g_gruppe")));
+                                        user.getString("e_g_gruppe"),
+                                        user.getString("e_id")));
                             }
 
                             //creating adapter object and setting it to recyclerview
                             UserAdapter adapter = new UserAdapter(AdministrationActivity.this,userList);
+                            TextView textView = findViewById(R.id.user_gruppe);
                             bView.setAdapter(adapter);
 
                         } catch (JSONException e) {
@@ -143,7 +152,6 @@ public class AdministrationActivity extends AppCompatActivity {
             }
             //Benutzer löschen wird geklickt
             case R.id.action_delete_user: {
-                //TODO: Zu entfernenden Benutzer aus Liste wählen, DELETE beim Server
                 break;
             }
             //Zurück-Pfeil wird geklickt
@@ -151,7 +159,15 @@ public class AdministrationActivity extends AppCompatActivity {
                 onBackPressed();
                 return true;
             }
+            case R.id.user_aktualisieren:{
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+                break;
+            }
         }
         return true;
     }
+
+
 }
