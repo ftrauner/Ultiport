@@ -1,4 +1,4 @@
 package spengergasse.at.ultiport.persistence;
 
-public interface IUserRepository {
+public interface IUserRepository{
 }
