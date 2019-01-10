@@ -57,8 +57,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         User user = mUsers.get(position);
         holder.vorname.setText(user.getVorname());
         holder.nachname.setText(user.getNachname());
+        if(user.getGruppe().equals("1")){
+            holder.gruppe.setText("Admin");
+        }
+        if(user.getGruppe().equals("2")){
+            holder.gruppe.setText("Requester");
+        }
+        if(user.getGruppe().equals("3")){
+            holder.gruppe.setText("Transporteur");
+        }
         holder.id.setText(user.getId());
-        holder.gruppe.setText(user.getGruppe());
+        //holder.gruppe.setText(user.getGruppe());
     }
 
     @Override
