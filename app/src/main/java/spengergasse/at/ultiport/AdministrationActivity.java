@@ -152,6 +152,8 @@ public class AdministrationActivity extends AppCompatActivity {
             }
             //Benutzer löschen wird geklickt
             case R.id.action_delete_user: {
+                Intent intent = new Intent(this, DeleteUserActivity.class);
+                startActivity(intent);
                 break;
             }
             //Zurück-Pfeil wird geklickt
