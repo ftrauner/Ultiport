@@ -65,7 +65,17 @@ public class AddUserActivity extends AppCompatActivity  {
         Password = password.getText().toString();
         Vorname = vorname.getText().toString();
         Benutzername = benutzername.getText().toString();
-        Gruppe = gruppe.getSelectedItem().toString();
+        if(gruppe.getSelectedItem().toString().equals("Admin")){
+            Gruppe = "1";
+        }
+
+        if(gruppe.getSelectedItem().toString().equals("Requester")){
+            Gruppe = "2";
+        }
+
+        if(gruppe.getSelectedItem().toString().equals("Transporteur")){
+            Gruppe = "3";
+        }
         BackGround b = new BackGround();
         b.execute(Name, Vorname,Benutzername,Password,Gruppe);
     }

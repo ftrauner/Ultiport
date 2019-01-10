@@ -44,6 +44,7 @@ public class EditUserActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+
         id = (EditText) findViewById(R.id.edit_benutzer_id);
         name = (EditText) findViewById(R.id.edit_benutzer_nachname);
         password = (EditText) findViewById(R.id.edit_benutzer_passwort);
@@ -58,7 +59,17 @@ public class EditUserActivity extends AppCompatActivity {
         Password = password.getText().toString();
         Vorname = vorname.getText().toString();
         Benutzername = benutzername.getText().toString();
-        Gruppe = gruppe.getSelectedItem().toString();
+        if(gruppe.getSelectedItem().toString().equals("Admin")){
+            Gruppe = "1";
+        }
+
+        if(gruppe.getSelectedItem().toString().equals("Requester")){
+            Gruppe = "2";
+        }
+
+        if(gruppe.getSelectedItem().toString().equals("Transporteur")){
+            Gruppe = "3";
+        }
         BackGround b = new BackGround();
         b.execute(Id, Name, Vorname,Benutzername,Password,Gruppe);
     }
