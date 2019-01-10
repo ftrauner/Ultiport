@@ -7,19 +7,6 @@
     style="@style/Theme.AppCompat.Light"
     tools:context=".AddUserActivity">
 
-    <EditText
-        android:id="@+id/benutzer_id"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/add_user_id"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_user_toolbar"
-        tools:ignore="Autofill" />
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/add_user_toolbar"
         android:layout_width="match_parent"
@@ -36,11 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:hint="@string/add_user_username"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/benutzer_id"
+        app:layout_constraintTop_toBottomOf="@+id/add_user_toolbar"
         tools:ignore="Autofill" />
 
     <EditText
