@@ -32,8 +32,8 @@
     <string name="delete_user_label">Benutzer löschen</string>
 
     <string-array name="numbers">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>Admin</item>
+        <item>Requester</item>
+        <item>Transporteur</item>
     </string-array>
 </resources>

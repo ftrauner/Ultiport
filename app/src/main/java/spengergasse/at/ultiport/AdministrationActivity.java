@@ -4,14 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -24,13 +21,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import spengergasse.at.ultiport.adapter.UserAdapter;
 import spengergasse.at.ultiport.entities.User;
-import spengergasse.at.ultiport.persistence.IOERepository;
 
 
 public class AdministrationActivity extends AppCompatActivity {
@@ -115,8 +110,6 @@ public class AdministrationActivity extends AppCompatActivity {
         //adding our stringrequest to queue
         Volley.newRequestQueue(this).add(stringRequest);
     }
-
-
 
     /**
      * Methode zum Erstellen des Menüs wie definiert in res/menu/toolbar_administration.xml

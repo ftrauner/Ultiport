@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,6 +27,13 @@ public class DeleteUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_delete_user);
 
         id = findViewById(R.id.DeleteUserID);
+
+        Toolbar deleteUserToolbar = findViewById(R.id.delete_user_toolbar);
+        setSupportActionBar(deleteUserToolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
     }
 
     public void main_delete(View v){

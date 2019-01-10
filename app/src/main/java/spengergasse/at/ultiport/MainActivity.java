@@ -4,18 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import spengergasse.at.ultiport.adapter.RequestsAdapter;
-import spengergasse.at.ultiport.entities.TransportRequest;
-
 public class MainActivity extends AppCompatActivity {
 
     private static String userGruppe = null;
+    private static final String REQUEST_URL = "http://www.ultiport.htl5.org/GetRequestData.php/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,20 +21,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar main_toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(main_toolbar);
 
-
-        //Requestlistte setzen
-        RecyclerView rvRequests = findViewById(R.id.requestList);
-
-        //Intent von der AddRequestActivity holen
-        Intent intent = getIntent();
-        //Übergebenen Request als neuen Request speichern
-        TransportRequest request = intent.getParcelableExtra("requestObject");
-        //Neuen Request zu statischer RequestListe der Request-Klasse hinzufügen
-        TransportRequest.requests.add(request);
-
-        RequestsAdapter requestsAdapter = new RequestsAdapter(TransportRequest.requests);
-        rvRequests.setAdapter(requestsAdapter);
-        rvRequests.setLayoutManager(new LinearLayoutManager(this));
+        //Irgendein Intent
+        /*Intent intent = new Intent();
+        intent.setData(Uri.parse(REQUEST_URL));
+        startService(intent);*/
 
         //Intent der Login-Klasse holen
         Intent intentLogIn = getIntent();
