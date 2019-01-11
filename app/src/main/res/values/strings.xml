@@ -40,5 +40,6 @@
     <string-array name="ArtDesTransports">
         <item>Patient</item>
         <item>Probe</item>
+        <item>Bett</item>
     </string-array>>
 </resources>

@@ -87,7 +87,7 @@ public class AdministrationActivity extends AppCompatActivity {
                                         user.getString("e_vorname"),
                                         user.getString("e_name"),
                                         user.getString("e_g_gruppe"),
-                                        user.getString("e_id")));
+                                        user.getString("id")));
                             }
 
                             //creating adapter object and setting it to recyclerview
