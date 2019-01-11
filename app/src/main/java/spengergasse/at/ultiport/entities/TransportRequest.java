@@ -38,7 +38,7 @@ public class TransportRequest implements Parcelable {
     //Normaler Konstruktor
 
 
-    public TransportRequest(String reqBeschr, Date reqStartZeit, String reqStartOE, String reqStartRaum, String reqEndOE, String reqEndRaum) {
+    public TransportRequest(String reqStartOE, String reqStartRaum, String reqEndOE, String reqEndRaum, Date reqStartZeit, String reqBeschr) {
         this.reqBeschr = reqBeschr;
         this.reqStartZeit = reqStartZeit;
         this.reqStartOE = reqStartOE;

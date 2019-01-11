@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Intent intent = new Intent(this, RequestWebService.class);
-        startService(intent);
+        //Intent intent = new Intent(this, RequestWebService.class);
+        //startService(intent);
 
         RequestData();
     }
@@ -69,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TransportRequest[]> call, Throwable t) {
-                System.out.println("Hurensohn");
+                System.out.println("GEHT NICHT!");
+                System.out.println(t.getMessage());
+                System.out.println(t.getCause().toString());
             }
         });
     }

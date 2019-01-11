@@ -1,10 +1,8 @@
 package spengergasse.at.ultiport;
 
 import android.content.Intent;
-import android.net.http.RequestQueue;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -26,14 +24,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
-import spengergasse.at.ultiport.entities.Raum;
 import spengergasse.at.ultiport.entities.TransportRequest;
 
 public class AddRequestActivity extends AppCompatActivity {
@@ -133,7 +126,7 @@ public class AddRequestActivity extends AppCompatActivity {
 
         Date date = new Date();
         EditText requestText = this.findViewById(R.id.requestText);
-        TransportRequest request = new TransportRequest(requestText.getText().toString(),date);
+        TransportRequest request = new TransportRequest(null, null, null, null, date, requestText.getText().toString());
 
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra("requestObject", request);
