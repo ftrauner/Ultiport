@@ -31,9 +31,16 @@ import spengergasse.at.ultiport.entities.TransportRequest;
 
 public class AddRequestActivity extends AppCompatActivity {
 
+    String GEBAUEDEGRUPPE;
+
     ArrayList<String> oeBez = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    ArrayList<String>oeRaum =  new ArrayList<>();
+
+    ArrayAdapter<String> adapterSpinner;
+    ArrayAdapter<String> adapterRaum;
     Spinner sp;
+    Spinner sp2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +48,13 @@ public class AddRequestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_request);
         Spinner spinnerA = findViewById(R.id.requestArt);
         sp = (Spinner)findViewById(R.id.requestStartOE);
-        adapter=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,oeBez);
-        sp.setAdapter(adapter);
+        sp2 = (Spinner)findViewById(R.id.requestStartRaum);
+
+        adapterSpinner=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,oeBez);
+        sp.setAdapter(adapterSpinner);
+
+        adapterRaum=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,oeRaum);
+        sp2.setAdapter(adapterRaum);
 
         ArrayAdapter<CharSequence> adapterA = ArrayAdapter.createFromResource(this,
                 R.array.ArtDesTransports,R.layout.support_simple_spinner_dropdown_item);
@@ -62,16 +74,81 @@ public class AddRequestActivity extends AppCompatActivity {
     public void onStart(){
         super.onStart();
         BackTask bt=new BackTask();
+        BackTask2 bt2 = new BackTask2();
         bt.execute();
+        bt2.execute();
     }
 
 
     private class BackTask extends AsyncTask<Void, Void, Void> {
-        ArrayList<String> list;
+        ArrayList<String> SpinnerList;
+        ArrayList<String> SpinnerRoomList;
 
         protected void onPreExecute() {
             super.onPreExecute();
-            list = new ArrayList<>();
+            SpinnerList  = new ArrayList<>();
+            SpinnerRoomList = new ArrayList<>();
+        }
+
+        protected Void doInBackground(Void... params) {
+            InputStream is = null;
+            String result = "";
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://ultiport.htl5.org/GetOE.php");
+                HttpResponse response = httpclient.execute(httppost);
+                HttpEntity entity = response.getEntity();
+                // Get our response as a String.
+                is = entity.getContent();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //convert response to string
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is, "utf-8"));
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    result += line;
+                }
+                is.close();
+                //result=sb.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // parse json data
+            try {
+                JSONArray jArray = new JSONArray(result);
+                for (int i = 0; i < jArray.length(); i++) {
+                    JSONObject jsonObject = jArray.getJSONObject(i);
+                    // add interviewee name to arraylist
+                    GEBAUEDEGRUPPE = jsonObject.getString("oe_bez");
+                    SpinnerList.add(jsonObject.getString("oe_bez"));
+                    //SpinnerRoomList.add(jsonObject.getString("reqStartRaum"));
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+
+        protected void onPostExecute(Void result) {
+            oeBez.addAll(SpinnerList);
+            oeRaum.addAll(SpinnerRoomList);
+            adapterSpinner.notifyDataSetChanged();
+            //adapterRaum.notifyDataSetChanged();
+        }
+    }
+
+    private class BackTask2 extends AsyncTask<Void, Void, Void> {
+        ArrayList<String> SpinnerRoomList;
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+            SpinnerRoomList = new ArrayList<>();
         }
 
         protected Void doInBackground(Void... params) {
@@ -106,7 +183,9 @@ public class AddRequestActivity extends AppCompatActivity {
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject jsonObject = jArray.getJSONObject(i);
                     // add interviewee name to arraylist
-                    list.add(jsonObject.getString("oe_bez"));
+                    //if(GEBAUEDEGRUPPE.equals(jsonObject.getString(""))
+                    SpinnerRoomList.add(jsonObject.getString("r_id"));
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -114,9 +193,11 @@ public class AddRequestActivity extends AppCompatActivity {
             return null;
         }
 
+
+
         protected void onPostExecute(Void result) {
-            oeBez.addAll(list);
-            adapter.notifyDataSetChanged();
+            oeRaum.addAll(SpinnerRoomList);
+            adapterRaum.notifyDataSetChanged();
         }
     }
 
