@@ -1,5 +1,6 @@
 package spengergasse.at.ultiport;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -7,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,12 +27,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
 import spengergasse.at.ultiport.entities.TransportRequest;
 
 public class AddRequestActivity extends AppCompatActivity {
+
+    Context ctx = this;
 
     String GEBAUEDEGRUPPE;
 
@@ -38,8 +47,12 @@ public class AddRequestActivity extends AppCompatActivity {
 
     ArrayAdapter<String> adapterSpinner;
     ArrayAdapter<String> adapterRaum;
-    Spinner sp;
-    Spinner sp2;
+    Spinner startortOE;
+    Spinner startraum;
+    Spinner zielOE;
+    Spinner zielraum;
+
+    String StartortOE, Startraum, ZielOE, Zielraum;
 
 
     @Override
@@ -47,14 +60,19 @@ public class AddRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_request);
         Spinner spinnerA = findViewById(R.id.requestArt);
-        sp = (Spinner)findViewById(R.id.requestStartOE);
-        sp2 = (Spinner)findViewById(R.id.requestStartRaum);
+        startortOE = (Spinner)findViewById(R.id.requestStartOE);
+        startraum = (Spinner)findViewById(R.id.requestStartRaum);
+        zielOE = (Spinner)findViewById(R.id.requestZielOE);
+        zielraum = (Spinner)findViewById(R.id.requestZielRaum);
 
         adapterSpinner=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,oeBez);
-        sp.setAdapter(adapterSpinner);
+        startortOE.setAdapter(adapterSpinner);
+
 
         adapterRaum=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,oeRaum);
-        sp2.setAdapter(adapterRaum);
+        startraum.setAdapter(adapterRaum);
+        zielraum.setAdapter(adapterRaum);
+        zielOE.setAdapter(adapterSpinner);
 
         ArrayAdapter<CharSequence> adapterA = ArrayAdapter.createFromResource(this,
                 R.array.ArtDesTransports,R.layout.support_simple_spinner_dropdown_item);
@@ -69,6 +87,20 @@ public class AddRequestActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+/*
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+*/
+
     }
 
     public void onStart(){
@@ -204,7 +236,9 @@ public class AddRequestActivity extends AppCompatActivity {
 
 
     public void addReqClick(View view){
-
+        Zielraum = zielraum.getSelectedItem().toString();
+        BackGround b = new BackGround();
+        b.execute();
         Date date = new Date();
         EditText requestText = this.findViewById(R.id.requestText);
         TransportRequest request = new TransportRequest(null, null, null, null, date, requestText.getText().toString());
@@ -212,6 +246,56 @@ public class AddRequestActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra("requestObject", request);
         startActivity(intent);
+    }
+
+    class BackGround extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            //String id = params[0];
+            String name = params[0];
+            String vorname = params[1];
+            String benutzername = params[2];
+            String password = params[3];
+            String gruppe = params[4];
+            String data="";
+            int tmp;
+
+            try {
+                URL url = new URL("http://ultiport.htl5.org/register.php");
+                String urlParams = "e_name="+name+"&e_vorname="+vorname+"&e_benutzername="+benutzername+"&e_passwort="+password+"&e_g_gruppe="+gruppe;
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoOutput(true);
+                OutputStream os = httpURLConnection.getOutputStream();
+                os.write(urlParams.getBytes());
+                os.flush();
+                os.close();
+                InputStream is = httpURLConnection.getInputStream();
+                while((tmp=is.read())!=-1){
+                    data+= (char)tmp;
+                }
+                is.close();
+                httpURLConnection.disconnect();
+
+                return data;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return "Exception: "+e.getMessage();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Exception: "+e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if(s.equals("")){
+                s="Data saved successfully.";
+            }
+            Toast.makeText(ctx, s, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -226,4 +310,5 @@ public class AddRequestActivity extends AppCompatActivity {
         }
         return true;
     }
+
 }
