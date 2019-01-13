@@ -4,47 +4,75 @@ package spengergasse.at.ultiport.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 //Klasse für den Transportauftrag
 public class TransportRequest implements Parcelable {
 
-
     // ID des Auftrags, automatisch generiert in DB
-    private String reqID;
-    //Beschreibung des Auftrags, wird beim Erstellen eingegeben
-    private String reqBeschr;
+    @SerializedName("a_nummer")
+    private int reqNummer;
     //Ersteller des Auftrags, wird mitgespeichert beim Erstellen (aktiver User)
-    private User reqAnforderer;
-    //Zuständiger Transporteur, ist zunächst null und wird beim Annehmen des Auftrags auf den Trasnporteur gesetzt
-    private User reqTransporteur;
-    //Datum und Uhrzeit des Erstellens, wird mitgespeichert beim Erstellen
-    private Date reqStartZeit;
-    //Start-Organisationseinheit beim Erstellen festgelegt
-    private String reqStartOE;
+    @SerializedName("a_e_anf")
+    @Expose
+    private String reqAnforderer;
     //Start-Raum beim Erstellen festgelegt
+    @SerializedName("a_r_start")
+    @Expose
     private String reqStartRaum;
-    //Ziel-Organisationseinheit beim Erstellen festgelegt
-    private String reqEndOE;
     //Ziel-Raum beim Erstellen festgelegt
+    @SerializedName("a_r_ziel")
+    @Expose
     private String reqEndRaum;
+    //Start-Organisationseinheit beim Erstellen festgelegt
+    @SerializedName("a_oe_start")
+    @Expose
+    private String reqStartOE;
+    //Ziel-Organisationseinheit beim Erstellen festgelegt
+    @SerializedName("a_oe_ende")
+    @Expose
+    private String reqEndOE;
+    //Art des Transports
+    @SerializedName("a_o_id")
+    @Expose
+    private String reqArt;
+    //Status 1= Erstellt 2= In Arbeit 3= Abgeschlossen
+    @SerializedName("a_s_status")
+    @Expose
+    private String reqStatus;
+    //Datum und Uhrzeit des Erstellens, wird mitgespeichert beim Erstellen
+    @SerializedName("a_startzeit")
+    @Expose
+    private Date reqStartZeit;
+    //Datum und Uhrzeit des Abschlusses
+    @SerializedName("a_endzeit")
+    @Expose
+    private Date reqEndZeit;
+    //Zuständiger Transporteur, ist zunächst null und wird beim Annehmen des Auftrags auf den Trasnporteur gesetzt
+    @SerializedName("a_e_trans")
+    @Expose
+    private String reqTransporteur;
+    //Beschreibung des Auftrags, wird beim Erstellen eingegeben
+    @SerializedName("a_beschr")
+    @Expose
+    private String reqBeschr;
 
-
-    //Liste speichert alle Aufträge
-    public static ArrayList<TransportRequest> requests = new ArrayList<TransportRequest>();
-
-
-    //Normaler Konstruktor
-
-
-    public TransportRequest(String reqStartOE, String reqStartRaum, String reqEndOE, String reqEndRaum, Date reqStartZeit, String reqBeschr) {
-        this.reqBeschr = reqBeschr;
-        this.reqStartZeit = reqStartZeit;
-        this.reqStartOE = reqStartOE;
+    //Konstruktor
+    public TransportRequest(String reqAnforderer, String reqStartRaum, String reqEndRaum, String reqStartOE, String reqEndOE, String reqArt, String reqStatus, Date reqStartZeit, Date reqEndZeit, String reqTransporteur, String reqBeschr) {
+        this.reqAnforderer = reqAnforderer;
         this.reqStartRaum = reqStartRaum;
-        this.reqEndOE = reqEndOE;
         this.reqEndRaum = reqEndRaum;
+        this.reqStartOE = reqStartOE;
+        this.reqEndOE = reqEndOE;
+        this.reqArt = reqArt;
+        this.reqStatus = reqStatus;
+        this.reqStartZeit = reqStartZeit;
+        this.reqEndZeit = reqEndZeit;
+        this.reqTransporteur = reqTransporteur;
+        this.reqBeschr = reqBeschr;
     }
 
     //Konstruktor für Parcelable zur Datenübergabe zwischen Activities
@@ -74,12 +102,12 @@ public class TransportRequest implements Parcelable {
 
     //Get & Set
 
-    public String getReqID() {
-        return reqID;
+    public int getReqNummer() {
+        return reqNummer;
     }
 
-    public void setReqID(String reqID) {
-        this.reqID = reqID;
+    public void setReqNummer(int reqNummer) {
+        this.reqNummer = reqNummer;
     }
 
     public String getReqBeschr() {
@@ -90,19 +118,19 @@ public class TransportRequest implements Parcelable {
         this.reqBeschr = reqBeschr;
     }
 
-    public User getReqAnforderer() {
+    public String getReqAnforderer() {
         return reqAnforderer;
     }
 
-    public void setReqAnforderer(User reqAnforderer) {
+    public void setReqAnforderer(String reqAnforderer) {
         this.reqAnforderer = reqAnforderer;
     }
 
-    public User getReqTransporteur() {
+    public String getReqTransporteur() {
         return reqTransporteur;
     }
 
-    public void setReqTransporteur(User reqTransporteur) {
+    public void setReqTransporteur(String reqTransporteur) {
         this.reqTransporteur = reqTransporteur;
     }
 
@@ -144,6 +172,30 @@ public class TransportRequest implements Parcelable {
 
     public void setReqEndRaum(String reqEndRaum) {
         this.reqEndRaum = reqEndRaum;
+    }
+
+    public String getReqStatus() {
+        return reqStatus;
+    }
+
+    public void setReqStatus(String reqStatus) {
+        this.reqStatus = reqStatus;
+    }
+
+    public String getReqArt() {
+        return reqArt;
+    }
+
+    public void setReqArt(String reqArt) {
+        this.reqArt = reqArt;
+    }
+
+    public Date getReqEndZeit() {
+        return reqEndZeit;
+    }
+
+    public void setReqEndZeit(Date reqEndZeit) {
+        this.reqEndZeit = reqEndZeit;
     }
 
     //Get & Set Ende

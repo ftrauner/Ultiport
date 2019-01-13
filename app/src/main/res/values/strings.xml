@@ -30,6 +30,7 @@
     <string name="delete_user_id">ID des Benutzers</string>
     <string name="delete_user_button">Löschen</string>
     <string name="delete_user_label">Benutzer löschen</string>
+    <string name="admin_list">Liste aktualisieren</string>
 
     <string-array name="numbers">
         <item>Admin</item>
@@ -41,5 +42,5 @@
         <item>Patient</item>
         <item>Probe</item>
         <item>Bett</item>
-    </string-array>>
+    </string-array>
 </resources>

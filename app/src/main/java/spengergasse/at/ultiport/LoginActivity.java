@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     String Name, Password;
     Context ctx = this;
     String NAME = null, GRUPPE = null, VORNAME = null;
+    int ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                 NAME = user_data.getString("e_name");
                 GRUPPE = user_data.getString("e_g_gruppe");
                 VORNAME = user_data.getString("e_vorname");
+                ID = user_data.getInt("e_id");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -106,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
             if (!s.equals("{\"user_data\":[]}")) {
                 //Übergebe Nutzergruppe
                 ma.putExtra("userGruppe",GRUPPE);
-
+                ma.putExtra("userID", ID);
                 //Starte MainActivity
                 startActivity(ma);
             /*

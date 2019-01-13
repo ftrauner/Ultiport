@@ -8,11 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -27,14 +25,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import spengergasse.at.ultiport.entities.TransportRequest;
+import spengergasse.at.ultiport.service.RequestWebService;
 
 public class AddRequestActivity extends AppCompatActivity {
 
@@ -51,15 +51,37 @@ public class AddRequestActivity extends AppCompatActivity {
     Spinner startraum;
     Spinner zielOE;
     Spinner zielraum;
+    Spinner requestArt;
 
     String StartortOE, Startraum, ZielOE, Zielraum;
+    int userID;
 
+    private void SendRequest(TransportRequest request) {
+
+        RequestWebService webService = RequestWebService.retrofit.create(RequestWebService.class);
+        Call<TransportRequest> call = webService.addRequest(request);
+
+        call.enqueue(new Callback<TransportRequest>() {
+
+            @Override
+            public void onResponse(Call<TransportRequest> call, Response<TransportRequest> response) {
+                TransportRequest responseRequest = response.body();
+                System.out.println("SCHEISSE ES GEHT");
+            }
+
+            @Override
+            public void onFailure(Call<TransportRequest> call, Throwable t) {
+                System.out.println(t.getMessage());
+                System.out.println(t.getCause().toString());
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_request);
-        Spinner spinnerA = findViewById(R.id.requestArt);
+        requestArt = findViewById(R.id.requestArt);
         startortOE = (Spinner)findViewById(R.id.requestStartOE);
         startraum = (Spinner)findViewById(R.id.requestStartRaum);
         zielOE = (Spinner)findViewById(R.id.requestZielOE);
@@ -67,7 +89,6 @@ public class AddRequestActivity extends AppCompatActivity {
 
         adapterSpinner=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,oeBez);
         startortOE.setAdapter(adapterSpinner);
-
 
         adapterRaum=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,oeRaum);
         startraum.setAdapter(adapterRaum);
@@ -78,9 +99,10 @@ public class AddRequestActivity extends AppCompatActivity {
                 R.array.ArtDesTransports,R.layout.support_simple_spinner_dropdown_item);
         adapterA.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinnerA.setAdapter(adapterA);
+        requestArt.setAdapter(adapterA);
 
-
+        Intent intentMain = getIntent();
+        int userID = intentMain.getIntExtra("userID", 0);
 
         Toolbar administration_toolbar = findViewById(R.id.add_request_toolbar);
         setSupportActionBar(administration_toolbar);
@@ -233,21 +255,35 @@ public class AddRequestActivity extends AppCompatActivity {
         }
     }
 
-
-
     public void addReqClick(View view){
-        Zielraum = zielraum.getSelectedItem().toString();
-        BackGround b = new BackGround();
-        b.execute();
+        //Zielraum = zielraum.getSelectedItem().toString();
+        String request_art = null;
+
+        if (requestArt.getSelectedItem().toString().equals("Patient")) {
+            request_art = "1";
+        }
+
+        if (requestArt.getSelectedItem().toString().equals("Probe")) {
+            request_art = "2";
+        }
+
+        if (requestArt.getSelectedItem().toString().equals("Bett")) {
+            request_art = "3";
+        }
+
+        DateFormat datumsFormat = SimpleDateFormat.getTimeInstance();
         Date date = new Date();
         EditText requestText = this.findViewById(R.id.requestText);
-        TransportRequest request = new TransportRequest(null, null, null, null, date, requestText.getText().toString());
+        TransportRequest request = new TransportRequest(String.valueOf(userID), startraum.getSelectedItem().toString(), zielraum.getSelectedItem().toString(), startortOE.getSelectedItem().toString(), zielOE.getSelectedItem().toString(), request_art, "1", date, null, null, requestText.getText().toString());
+
+        SendRequest(request);
 
         Intent intent = new Intent(this,MainActivity.class);
-        intent.putExtra("requestObject", request);
         startActivity(intent);
     }
 
+
+    /*
     class BackGround extends AsyncTask<String, String, String> {
 
         @Override
@@ -297,6 +333,8 @@ public class AddRequestActivity extends AppCompatActivity {
             Toast.makeText(ctx, s, Toast.LENGTH_LONG).show();
         }
     }
+
+    */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
