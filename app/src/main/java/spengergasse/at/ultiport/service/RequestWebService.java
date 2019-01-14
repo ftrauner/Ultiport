@@ -35,7 +35,7 @@ public interface RequestWebService {
 
     Retrofit retrofit2 = new Retrofit.Builder()
             .baseUrl(BASIS_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson2))
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
 
     @GET(REQUEST_FEED)
