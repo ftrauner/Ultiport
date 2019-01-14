@@ -3,9 +3,7 @@ package spengergasse.at.ultiport;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -32,17 +30,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import spengergasse.at.ultiport.entities.TransportRequest;
-import spengergasse.at.ultiport.service.RequestWebService;
 
 public class AddRequestActivity extends AppCompatActivity {
 
@@ -214,10 +202,8 @@ public class AddRequestActivity extends AppCompatActivity {
         BackGround b = new BackGround();
         b.execute(Anforderer, Startraum, Zielraum, StartortOE, ZielOE, RequestArt, Status,  Beschreibung);
 
-
-
-
-
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     private class BackTask2 extends AsyncTask<Void, Void, Void> {
