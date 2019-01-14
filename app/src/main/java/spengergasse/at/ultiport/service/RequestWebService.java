@@ -54,8 +54,6 @@ public interface RequestWebService {
                                        @Field("a_oe_ende") String endOE,
                                        @Field("a_o_id") String art,
                                        @Field("a_s_status") String status,
-                                       @Field("a_startzeit") String startZeit,
-                                       @Field("a_endzeit") String endZeit,
                                        @Field("a_e_trans") String trans,
                                        @Field("a_beschr") String beschr);
 }

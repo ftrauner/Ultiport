@@ -75,7 +75,7 @@
         android:layout_marginStart="140dp"
         android:layout_marginLeft="140dp"
         android:layout_marginBottom="27dp"
-        android:onClick="addReqClick"
+        android:onClick="send_request_to_database"
         android:text="@string/add_request_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

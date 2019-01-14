@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -27,6 +28,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,42 +60,13 @@ public class AddRequestActivity extends AppCompatActivity {
     Spinner zielOE;
     Spinner zielraum;
     Spinner requestArt;
+    EditText requestText;
 
-    String StartortOE, Startraum, ZielOE, Zielraum;
+    String Anforderer, StartortOE, Startraum, ZielOE, Zielraum, RequestArt, Status, Transporter, Beschreibung;
     int userID;
 
-    private void SendRequest(String anf,
-                             String startR,
-                             String zielR,
-                             String startOE,
-                             String endOE,
-                             String art,
-                             String status,
-                             String startZeit,
-                             String endZeit,
-                             String trans,
-                             String beschr) {
 
-        RequestWebService webService = RequestWebService.retrofit2.create(RequestWebService.class);
-        Call<TransportRequest> call = webService.addRequest2(anf, startR, zielR, startOE, endOE, art, status, startZeit, endZeit, trans, beschr);
 
-        call.enqueue(new Callback<TransportRequest>() {
-
-            @Override
-            public void onResponse(Call<TransportRequest> call, Response<TransportRequest> response) {
-                System.out.println(call.request().headers().toString());
-                System.out.println(call.request().url().toString());
-                TransportRequest responseRequest = response.body();
-                System.out.println("SCHEISSE ES GEHT");
-            }
-
-            @Override
-            public void onFailure(Call<TransportRequest> call, Throwable t) {
-                System.out.println(t.getMessage());
-                System.out.println(t.getCause().toString());
-            }
-        });
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +77,7 @@ public class AddRequestActivity extends AppCompatActivity {
         startraum = (Spinner)findViewById(R.id.requestStartRaum);
         zielOE = (Spinner)findViewById(R.id.requestZielOE);
         zielraum = (Spinner)findViewById(R.id.requestZielRaum);
+        requestText = (EditText)findViewById(R.id.requestText);
 
         adapterSpinner=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,oeBez);
         startortOE.setAdapter(adapterSpinner);
@@ -124,19 +101,6 @@ public class AddRequestActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-/*
-        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-*/
 
     }
 
@@ -212,6 +176,50 @@ public class AddRequestActivity extends AppCompatActivity {
         }
     }
 
+    public void send_request_to_database(View v){
+        Anforderer = String.valueOf(userID);
+        Startraum = startraum.getSelectedItem().toString();
+        Zielraum = zielraum.getSelectedItem().toString();
+        if(startortOE.getSelectedItem().toString().equals("A-Gebaeude")){
+            StartortOE = "1";
+        }
+        if(startortOE.getSelectedItem().toString().equals("B-Gebaeude")){
+            StartortOE = "2";
+        }
+        if(startortOE.getSelectedItem().toString().equals("C-Gebaeude")){
+            StartortOE = "3";
+        }
+        if (zielOE.getSelectedItem().toString().equals("A-Gebaeude")) {
+            ZielOE = "1";
+        }
+        if (zielOE.getSelectedItem().toString().equals("B-Gebaeude")) {
+            ZielOE = "2";
+        }
+        if (zielOE.getSelectedItem().toString().equals("C-Gebaeude")) {
+            ZielOE = "3";
+        }
+        if(requestArt.getSelectedItem().toString().equals("Patient")){
+            RequestArt = "1";
+        }
+        if(requestArt.getSelectedItem().toString().equals("Probe")){
+            RequestArt = "2";
+        }
+        if(requestArt.getSelectedItem().toString().equals("Bett")){
+            RequestArt = "3";
+        }
+        Status = "1";
+        Transporter = null;
+        Beschreibung = requestText.getText().toString();
+
+        BackGround b = new BackGround();
+        b.execute(Anforderer, Startraum, Zielraum, StartortOE, ZielOE, RequestArt, Status,  Beschreibung);
+
+
+
+
+
+    }
+
     private class BackTask2 extends AsyncTask<Void, Void, Void> {
         ArrayList<String> SpinnerRoomList;
 
@@ -270,55 +278,29 @@ public class AddRequestActivity extends AppCompatActivity {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void addReqClick(View view) throws ParseException {
-        //Zielraum = zielraum.getSelectedItem().toString();
-        String request_art = null;
-
-        if (requestArt.getSelectedItem().toString().equals("Patient")) {
-            request_art = "1";
-        }
-
-        if (requestArt.getSelectedItem().toString().equals("Probe")) {
-            request_art = "2";
-        }
-
-        if (requestArt.getSelectedItem().toString().equals("Bett")) {
-            request_art = "3";
-        }
-
-        DateFormat datumsFormat = SimpleDateFormat.getTimeInstance();
-        Date date = new Date();
 
 
 
-        EditText requestText = this.findViewById(R.id.requestText);
-        //TransportRequest request = new TransportRequest(String.valueOf(userID), startraum.getSelectedItem().toString(), zielraum.getSelectedItem().toString(), startortOE.getSelectedItem().toString(), zielOE.getSelectedItem().toString(), request_art, "1", date, null, null, requestText.getText().toString());
-
-        SendRequest(String.valueOf(userID), startraum.getSelectedItem().toString(), zielraum.getSelectedItem().toString(), startortOE.getSelectedItem().toString(), zielOE.getSelectedItem().toString(), request_art, "1", datumsFormat.format(date), null, null, requestText.getText().toString());
-
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-    }
-
-
-    /*
     class BackGround extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... params) {
             //String id = params[0];
-            String name = params[0];
-            String vorname = params[1];
-            String benutzername = params[2];
-            String password = params[3];
-            String gruppe = params[4];
+            String anforderer = params[0];
+            String startRaum = params[1];
+            String endRaum = params[2];
+            String oeStart = params[3];
+            String oeEnde = params[4];
+            String objekt = params[5];
+            String status = params[6];
+            String beschreibung = params[7];
             String data="";
             int tmp;
 
             try {
-                URL url = new URL("http://ultiport.htl5.org/register.php");
-                String urlParams = "e_name="+name+"&e_vorname="+vorname+"&e_benutzername="+benutzername+"&e_passwort="+password+"&e_g_gruppe="+gruppe;
+                URL url = new URL("http://ultiport.htl5.org/addRequest.php");
+                String urlParams = "a_e_anf="+anforderer+"&a_r_start="+startRaum+"&a_r_ziel="+endRaum+"&a_oe_start="+oeStart
+                        +"&a_oe_ende="+oeEnde+"&a_o_id="+objekt+"&a_s_status="+status+"&a_beschr="+beschreibung;
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
@@ -353,7 +335,7 @@ public class AddRequestActivity extends AppCompatActivity {
         }
     }
 
-    */
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
