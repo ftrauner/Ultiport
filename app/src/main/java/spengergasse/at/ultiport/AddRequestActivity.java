@@ -3,7 +3,9 @@ package spengergasse.at.ultiport;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -26,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,15 +59,27 @@ public class AddRequestActivity extends AppCompatActivity {
     String StartortOE, Startraum, ZielOE, Zielraum;
     int userID;
 
-    private void SendRequest(TransportRequest request) {
+    private void SendRequest(String anf,
+                             String startR,
+                             String zielR,
+                             String startOE,
+                             String endOE,
+                             String art,
+                             String status,
+                             Date startZeit,
+                             Date endZeit,
+                             String trans,
+                             String beschr) {
 
-        RequestWebService webService = RequestWebService.retrofit.create(RequestWebService.class);
-        Call<TransportRequest> call = webService.addRequest(request);
+        RequestWebService webService = RequestWebService.retrofit2.create(RequestWebService.class);
+        Call<TransportRequest> call = webService.addRequest2(anf, startR, zielR, startOE, endOE, art, status, startZeit, endZeit, trans, beschr);
 
         call.enqueue(new Callback<TransportRequest>() {
 
             @Override
             public void onResponse(Call<TransportRequest> call, Response<TransportRequest> response) {
+                System.out.println(call.request().headers().toString());
+                System.out.println(call.request().url().toString());
                 TransportRequest responseRequest = response.body();
                 System.out.println("SCHEISSE ES GEHT");
             }
@@ -102,7 +117,7 @@ public class AddRequestActivity extends AppCompatActivity {
         requestArt.setAdapter(adapterA);
 
         Intent intentMain = getIntent();
-        int userID = intentMain.getIntExtra("userID", 0);
+        userID = intentMain.getIntExtra("userID", 0);
 
         Toolbar administration_toolbar = findViewById(R.id.add_request_toolbar);
         setSupportActionBar(administration_toolbar);
@@ -255,7 +270,8 @@ public class AddRequestActivity extends AppCompatActivity {
         }
     }
 
-    public void addReqClick(View view){
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void addReqClick(View view) throws ParseException {
         //Zielraum = zielraum.getSelectedItem().toString();
         String request_art = null;
 
@@ -273,10 +289,13 @@ public class AddRequestActivity extends AppCompatActivity {
 
         DateFormat datumsFormat = SimpleDateFormat.getTimeInstance();
         Date date = new Date();
-        EditText requestText = this.findViewById(R.id.requestText);
-        TransportRequest request = new TransportRequest(String.valueOf(userID), startraum.getSelectedItem().toString(), zielraum.getSelectedItem().toString(), startortOE.getSelectedItem().toString(), zielOE.getSelectedItem().toString(), request_art, "1", date, null, null, requestText.getText().toString());
+        datumsFormat.format(date);
 
-        SendRequest(request);
+
+        EditText requestText = this.findViewById(R.id.requestText);
+        //TransportRequest request = new TransportRequest(String.valueOf(userID), startraum.getSelectedItem().toString(), zielraum.getSelectedItem().toString(), startortOE.getSelectedItem().toString(), zielOE.getSelectedItem().toString(), request_art, "1", date, null, null, requestText.getText().toString());
+
+        SendRequest(String.valueOf(userID), startraum.getSelectedItem().toString(), zielraum.getSelectedItem().toString(), startortOE.getSelectedItem().toString(), zielOE.getSelectedItem().toString(), request_art, "1", date, null, null, requestText.getText().toString());
 
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
