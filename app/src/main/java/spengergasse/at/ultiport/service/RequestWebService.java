@@ -3,8 +3,6 @@ package spengergasse.at.ultiport.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.Date;
-
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -56,8 +54,8 @@ public interface RequestWebService {
                                        @Field("a_oe_ende") String endOE,
                                        @Field("a_o_id") String art,
                                        @Field("a_s_status") String status,
-                                       @Field("a_startzeit") Date startZeit,
-                                       @Field("a_endzeit") Date endZeit,
+                                       @Field("a_startzeit") String startZeit,
+                                       @Field("a_endzeit") String endZeit,
                                        @Field("a_e_trans") String trans,
                                        @Field("a_beschr") String beschr);
 }

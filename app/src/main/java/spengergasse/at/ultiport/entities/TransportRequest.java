@@ -7,8 +7,6 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
-
 //Klasse für den Transportauftrag
 public class TransportRequest implements Parcelable {
 
@@ -46,11 +44,11 @@ public class TransportRequest implements Parcelable {
     //Datum und Uhrzeit des Erstellens, wird mitgespeichert beim Erstellen
     @SerializedName("a_startzeit")
     @Expose
-    private Date reqStartZeit;
+    private String reqStartZeit;
     //Datum und Uhrzeit des Abschlusses
     @SerializedName("a_endzeit")
     @Expose
-    private Date reqEndZeit;
+    private String reqEndZeit;
     //Zuständiger Transporteur, ist zunächst null und wird beim Annehmen des Auftrags auf den Trasnporteur gesetzt
     @SerializedName("a_e_trans")
     @Expose
@@ -61,7 +59,7 @@ public class TransportRequest implements Parcelable {
     private String reqBeschr;
 
     //Konstruktor
-    public TransportRequest(String reqAnforderer, String reqStartRaum, String reqEndRaum, String reqStartOE, String reqEndOE, String reqArt, String reqStatus, Date reqStartZeit, Date reqEndZeit, String reqTransporteur, String reqBeschr) {
+    public TransportRequest(String reqAnforderer, String reqStartRaum, String reqEndRaum, String reqStartOE, String reqEndOE, String reqArt, String reqStatus, String reqStartZeit, String reqEndZeit, String reqTransporteur, String reqBeschr) {
         this.reqAnforderer = reqAnforderer;
         this.reqStartRaum = reqStartRaum;
         this.reqEndRaum = reqEndRaum;
@@ -80,7 +78,7 @@ public class TransportRequest implements Parcelable {
         //Setze Beschreibungs-Text auf eingelesenen String
         reqBeschr = in.readString();
         //Setze Zeit auf eingelesene Long
-        reqStartZeit = new Date(in.readLong());
+        reqStartZeit = in.readString();
         reqStartOE = in.readString();
         reqStartRaum = in.readString();
         reqEndOE = in.readString();
@@ -134,11 +132,11 @@ public class TransportRequest implements Parcelable {
         this.reqTransporteur = reqTransporteur;
     }
 
-    public Date getReqStartZeit() {
+    public String getReqStartZeit() {
         return reqStartZeit;
     }
 
-    public void setReqStartZeit(Date reqStartZeit) {
+    public void setReqStartZeit(String reqStartZeit) {
         this.reqStartZeit = reqStartZeit;
     }
 
@@ -190,11 +188,11 @@ public class TransportRequest implements Parcelable {
         this.reqArt = reqArt;
     }
 
-    public Date getReqEndZeit() {
+    public String getReqEndZeit() {
         return reqEndZeit;
     }
 
-    public void setReqEndZeit(Date reqEndZeit) {
+    public void setReqEndZeit(String reqEndZeit) {
         this.reqEndZeit = reqEndZeit;
     }
 
@@ -211,7 +209,7 @@ public class TransportRequest implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         //Übergebe Beschreibungs-Text
         dest.writeString(this.reqBeschr);
-        //Übergebe Zeit als Long mit getTime(), da Date Datentyp nicht möglich
-        dest.writeLong(this.reqStartZeit.getTime());
+        //Übergebe Zeit
+        dest.writeString(this.reqStartZeit);
     }
 }

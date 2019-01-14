@@ -66,8 +66,8 @@ public class AddRequestActivity extends AppCompatActivity {
                              String endOE,
                              String art,
                              String status,
-                             Date startZeit,
-                             Date endZeit,
+                             String startZeit,
+                             String endZeit,
                              String trans,
                              String beschr) {
 
@@ -289,13 +289,13 @@ public class AddRequestActivity extends AppCompatActivity {
 
         DateFormat datumsFormat = SimpleDateFormat.getTimeInstance();
         Date date = new Date();
-        datumsFormat.format(date);
+
 
 
         EditText requestText = this.findViewById(R.id.requestText);
         //TransportRequest request = new TransportRequest(String.valueOf(userID), startraum.getSelectedItem().toString(), zielraum.getSelectedItem().toString(), startortOE.getSelectedItem().toString(), zielOE.getSelectedItem().toString(), request_art, "1", date, null, null, requestText.getText().toString());
 
-        SendRequest(String.valueOf(userID), startraum.getSelectedItem().toString(), zielraum.getSelectedItem().toString(), startortOE.getSelectedItem().toString(), zielOE.getSelectedItem().toString(), request_art, "1", date, null, null, requestText.getText().toString());
+        SendRequest(String.valueOf(userID), startraum.getSelectedItem().toString(), zielraum.getSelectedItem().toString(), startortOE.getSelectedItem().toString(), zielOE.getSelectedItem().toString(), request_art, "1", datumsFormat.format(date), null, null, requestText.getText().toString());
 
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
