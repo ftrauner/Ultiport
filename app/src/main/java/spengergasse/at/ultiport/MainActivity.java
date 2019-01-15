@@ -15,6 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,11 +24,16 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import spengergasse.at.ultiport.adapter.RecyclerItemClickListener;
 import spengergasse.at.ultiport.adapter.RequestsAdapter;
+import spengergasse.at.ultiport.database.DatabaseHandler;
 import spengergasse.at.ultiport.entities.TransportRequest;
 import spengergasse.at.ultiport.service.RequestWebService;
 
 public class MainActivity extends AppCompatActivity {
+
+
+
 
     private static String userGruppe = null;
     int userID;
@@ -37,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DatabaseHandler databaseHandler = new DatabaseHandler(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -56,6 +64,22 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.requestList);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        Context context = getApplicationContext();
+                        CharSequence text = "Hello toast!";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast.makeText(context, text, duration).show();
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
+
 
         //Intent intent = new Intent(this, RequestWebService.class);
         //startService(intent);
