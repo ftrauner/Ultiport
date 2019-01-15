@@ -47,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intentLogIn = getIntent();
         //Übergebene Nutzergruppe als String speichern
         //Setze static Parameter zur Überprüfung der Berechtigung
-        userGruppe = intentLogIn.getStringExtra("userGruppe");
+        //userGruppe = intentLogIn.getStringExtra("userGruppe");
+        userGruppe = LoginActivity.GRUPPE;
+
         userID = intentLogIn.getIntExtra("userID", 0);
 
         RequestsAdapter adapter = new RequestsAdapter();
@@ -136,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         //Berechtigungen werden überprüft
         switch (item.getItemId()) {
             case R.id.action_add_request: {
-                if (userGruppe.equals("1") || userGruppe.equals("2")) {
+                if (LoginActivity.GRUPPE.equals("1") || LoginActivity.GRUPPE.equals("2")) {
                     Intent intent = new Intent(this, AddRequestActivity.class);
                     intent.putExtra("userID", userID);
                     startActivity(intent);
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
             case R.id.action_administration: {
-                if (userGruppe.equals("1")) {
+                if (LoginActivity.GRUPPE.equals("1")) {
                     Intent intent = new Intent(this, AdministrationActivity.class);
                     startActivity(intent);
                 } else {

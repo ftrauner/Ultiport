@@ -24,8 +24,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText name, password;
     String Name, Password;
     Context ctx = this;
-    String NAME = null, GRUPPE = null, VORNAME = null;
+    static String GRUPPE = null;
     int ID;
+    String NAME = null, VORNAME = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
