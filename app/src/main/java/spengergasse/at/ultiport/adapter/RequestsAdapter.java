@@ -19,6 +19,7 @@ import spengergasse.at.ultiport.entities.TransportRequest;
 public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHolder> {
 
 
+
     private Context mContext;
     //Interne Request-Liste
     private List<TransportRequest> mRequests;
