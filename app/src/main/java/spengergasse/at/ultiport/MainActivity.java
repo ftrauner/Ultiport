@@ -1,14 +1,9 @@
 package spengergasse.at.ultiport;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intentLogIn = getIntent();
         //Übergebene Nutzergruppe als String speichern
         //Setze static Parameter zur Überprüfung der Berechtigung
-        //userGruppe = intentLogIn.getStringExtra("userGruppe");
         userGruppe = LoginActivity.GRUPPE;
 
         userID = intentLogIn.getIntExtra("userID", 0);
@@ -87,38 +81,6 @@ public class MainActivity extends AppCompatActivity {
         RequestData();
     }
 
-    private void Benachrichtige() {
-
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(this, "ABC123")
-                        .setSmallIcon(R.drawable.ic_ultiport_logo)
-                        .setContentTitle("ACHTUNG!!!!")
-                        .setContentText("Scheise was ist pasirt");
-
-        Intent notificationIntent = new Intent(this, MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(contentIntent);
-
-        // Add as notification
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(0, builder.build());
-    }
-
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Auftrag";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
-
     private void RequestData() {
 
         RequestWebService webService = RequestWebService.retrofit.create(RequestWebService.class);
@@ -137,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<TransportRequest[]> call, Throwable t) {
                 System.out.println("GEHT NICHT!");
-                System.out.println(t.getMessage());
-                System.out.println(t.getCause().toString());
             }
         });
     }
