@@ -18,17 +18,68 @@
         />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="8dp"
-        android:text="Name"
+        android:text="Vorname"
         app:layout_constraintBottom_toTopOf="@+id/userList"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/userList"
-        app:layout_constraintTop_toBottomOf="@+id/administration_toolbar" />
+        app:layout_constraintTop_toTopOf="@+id/administration_toolbar"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="8dp"
+        android:text="Zuname"
+        app:layout_constraintBottom_toTopOf="@+id/userList"
+        app:layout_constraintStart_toStartOf="@+id/userList"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="8dp"
+        android:text="Gruppe"
+        app:layout_constraintBottom_toTopOf="@+id/userList"
+        app:layout_constraintStart_toStartOf="@+id/userList"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/u_id"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="40dp"
+        android:text="ID"
+        app:layout_constraintBottom_toTopOf="@+id/userList"
+        app:layout_constraintStart_toStartOf="@+id/userList"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/userList"
@@ -43,6 +94,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/administration_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/administration_toolbar"
+        />
 
 </android.support.constraint.ConstraintLayout>
