@@ -31,6 +31,7 @@
     <string name="delete_user_button">Löschen</string>
     <string name="delete_user_label">Benutzer löschen</string>
     <string name="admin_list">Liste aktualisieren</string>
+    <string name="register_button">Benachrichtigungen aktivieren</string>
 
     <string-array name="numbers">
         <item>Admin</item>

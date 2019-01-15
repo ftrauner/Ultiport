@@ -10,6 +10,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import spengergasse.at.ultiport.LoginActivity;
 import spengergasse.at.ultiport.MainActivity;
 
 
@@ -74,7 +75,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             MyNotificationManager mNotificationManager = new MyNotificationManager(getApplicationContext());
 
             //creating an intent for the notification
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 
             //if there is no image
             if (imageUrl.equals("null")) {

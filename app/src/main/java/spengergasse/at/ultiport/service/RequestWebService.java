@@ -56,4 +56,5 @@ public interface RequestWebService {
                                        @Field("a_s_status") String status,
                                        @Field("a_e_trans") String trans,
                                        @Field("a_beschr") String beschr);
+
 }

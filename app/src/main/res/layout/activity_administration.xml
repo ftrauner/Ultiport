@@ -7,15 +7,16 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/administration_toolbar"
+        android:name="Name"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        tools:targetApi="lollipop"
-        android:name="Name"
-        />
+        tools:targetApi="lollipop" />
 
     <TextView
         android:layout_width="wrap_content"
