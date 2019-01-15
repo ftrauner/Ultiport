@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "910645394082",
+    "firebase_url": "https://ultiport-38361.firebaseio.com",
+    "project_id": "ultiport-38361",
+    "storage_bucket": "ultiport-38361.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910645394082:android:54a40ee858b00039",
+        "android_client_info": {
+          "package_name": "spengergasse.at.ultiport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910645394082-sb5u6mne1njqfoqe8831s9sp7r6jih8q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "spengergasse.at.ultiport",
+            "certificate_hash": "e70b1ce3da63580cbd9cef74868c63b1b448aa75"
+          }
+        },
+        {
+          "client_id": "910645394082-8e5mntqrf9dgkh6b66gvguquuov3s2o0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYyJlPMhgGRP1dGoisBcB_BdOSmNHAzn4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910645394082-8e5mntqrf9dgkh6b66gvguquuov3s2o0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
