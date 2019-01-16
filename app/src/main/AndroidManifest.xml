@@ -115,6 +115,12 @@
         android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.CustomTheme"
             />
+        <activity
+            android:name=".PopAbschließen"
+            android:label="Auftrag abschliessen"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.CustomTheme"
+            />
 
     </application>
 

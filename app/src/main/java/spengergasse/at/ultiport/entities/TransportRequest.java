@@ -75,15 +75,17 @@ public class TransportRequest implements Parcelable {
 
     //Konstruktor für Parcelable zur Datenübergabe zwischen Activities
     private TransportRequest(Parcel in) {
+        reqNummer = in.readInt();
         //Setze Beschreibungs-Text auf eingelesenen String
         reqBeschr = in.readString();
         //Setze Zeit auf eingelesene Long
+        reqStatus = in.readString();
         reqStartZeit = in.readString();
         reqStartOE = in.readString();
         reqStartRaum = in.readString();
         reqEndOE = in.readString();
         reqEndRaum = in.readString();
-        reqNummer = in.readInt();
+
     }
 
     //Anforderung für Parcelable
@@ -208,11 +210,13 @@ public class TransportRequest implements Parcelable {
     // Anforderung für Parcelable TODO: Alle Attribute setzen wenn möglich
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.reqNummer);
         //Übergebe Beschreibungs-Text
         dest.writeString(this.reqBeschr);
         //Übergebe Zeit
+        dest.writeString(this.reqStatus);
         dest.writeString(this.reqStartZeit);
 
-        dest.writeInt(this.reqNummer);
+
     }
 }

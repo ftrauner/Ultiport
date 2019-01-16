@@ -18,7 +18,7 @@ import java.net.URL;
 
 import spengergasse.at.ultiport.entities.TransportRequest;
 
-public class Pop extends Activity {
+public class PopAbschließen extends Activity {
     Context ctx=this;
 
     String auftrag, transporteur;
@@ -27,7 +27,7 @@ public class Pop extends Activity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_popwindow);
+        setContentView(R.layout.activity_popfinish);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -43,7 +43,7 @@ public class Pop extends Activity {
 
         getWindow().setLayout((int)(width*.4), (int)(height*.2));
     }
-    public void akzeptieren(View v) {
+    public void abschliessen(View v) {
 
         BackGround b = new BackGround();
         b.execute(auftrag, transporteur);
@@ -60,7 +60,7 @@ public class Pop extends Activity {
             int tmp;
 
             try {
-                URL url = new URL("http://ultiport.htl5.org/AuftragAccept.php");
+                URL url = new URL("http://ultiport.htl5.org/AuftragFinish.php");
                 String urlParams = "a_nummer="+auftragid+"&a_e_trans="+transid;
                 String data="";
 

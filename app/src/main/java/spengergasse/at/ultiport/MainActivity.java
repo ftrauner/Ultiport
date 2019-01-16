@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static String userGruppe = null;
     int userID;
+
     List<TransportRequest> mRequestList;
     RecyclerView mRecyclerView;
     RequestsAdapter mRequestAdapter;
@@ -58,8 +59,15 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        if(userGruppe.equals("3")){
+                        if(userGruppe.equals("3") && mRequestList.get(position).getReqStatus().equals("1") && mRequestList.get(position).getReqTransporteur() == null){
+
                             Intent intent = new Intent(MainActivity.this, Pop.class);
+                            intent.putExtra("request", mRequestList.get(position));
+                            intent.putExtra("userID", userID);
+                            startActivity(intent);
+                        }
+                        if(userGruppe.equals("3") && mRequestList.get(position).getReqStatus().equals("2") && mRequestList.get(position).getReqTransporteur().equals(String.valueOf(userID))){
+                            Intent intent = new Intent(MainActivity.this, PopAbschließen.class);
                             intent.putExtra("request", mRequestList.get(position));
                             intent.putExtra("userID", userID);
                             startActivity(intent);
