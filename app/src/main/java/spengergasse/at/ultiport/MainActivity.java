@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override public void onItemClick(View view, int position) {
                         if(userGruppe.equals("3")){
                             startActivity(new Intent(MainActivity.this,Pop.class));
+
                         }
 
 

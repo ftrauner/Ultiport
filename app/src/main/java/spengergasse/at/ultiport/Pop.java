@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -15,8 +16,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import spengergasse.at.ultiport.adapter.RecyclerItemClickListener;
+
 public class Pop extends Activity {
     Context ctx=this;
+
+    String auftrag, transporteur;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -32,6 +38,12 @@ public class Pop extends Activity {
 
         getWindow().setLayout((int)(width*.4), (int)(height*.2));
     }
+    public void akzeptieren(View v) {
+
+        BackGround b = new BackGround();
+        b.execute();
+    }
+
     class BackGround extends AsyncTask<String, String, String> {
 
         @Override
