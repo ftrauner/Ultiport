@@ -44,6 +44,7 @@ public class RegisterForPushActivity extends AppCompatActivity {
 
         final String token = SharedPreference.getInstance(this).getDeviceToken();
         //final String email = editTextEmail.getText().toString();
+        System.out.println(token);
 
         if (token == null) {
             progressDialog.dismiss();
