@@ -83,6 +83,7 @@ public class TransportRequest implements Parcelable {
         reqStartRaum = in.readString();
         reqEndOE = in.readString();
         reqEndRaum = in.readString();
+        reqNummer = in.readInt();
     }
 
     //Anforderung für Parcelable
@@ -211,5 +212,7 @@ public class TransportRequest implements Parcelable {
         dest.writeString(this.reqBeschr);
         //Übergebe Zeit
         dest.writeString(this.reqStartZeit);
+
+        dest.writeInt(this.reqNummer);
     }
 }
