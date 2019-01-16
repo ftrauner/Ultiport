@@ -1,8 +1,6 @@
 package spengergasse.at.ultiport;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,15 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -69,12 +59,11 @@ public class MainActivity extends AppCompatActivity {
                 new RecyclerItemClickListener(this, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
                         if(userGruppe.equals("3")){
-                            startActivity(new Intent(MainActivity.this,Pop.class));
-
+                            Intent intent = new Intent(MainActivity.this, Pop.class);
+                            intent.putExtra("request", mRequestList.get(position));
+                            intent.putExtra("userID", userID);
+                            startActivity(intent);
                         }
-
-
-
                     }
 
                     @Override public void onLongItemClick(View view, int position) {

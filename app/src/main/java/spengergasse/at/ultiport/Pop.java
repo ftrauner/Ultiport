@@ -2,10 +2,10 @@ package spengergasse.at.ultiport;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,13 +16,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import spengergasse.at.ultiport.adapter.RecyclerItemClickListener;
+import spengergasse.at.ultiport.entities.TransportRequest;
 
 public class Pop extends Activity {
     Context ctx=this;
 
     String auftrag, transporteur;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -36,12 +35,18 @@ public class Pop extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
+        Intent getMain = getIntent();
+        TransportRequest request = getMain.getParcelableExtra("request");
+
+        auftrag = String.valueOf(request.getReqNummer());
+        transporteur = String.valueOf(getMain.getIntExtra("userID", 0));
+
         getWindow().setLayout((int)(width*.4), (int)(height*.2));
     }
     public void akzeptieren(View v) {
 
         BackGround b = new BackGround();
-        b.execute();
+        b.execute(auftrag, transporteur);
     }
 
     class BackGround extends AsyncTask<String, String, String> {
