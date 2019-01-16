@@ -13,19 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,10 +22,7 @@ import spengergasse.at.ultiport.adapter.RecyclerItemClickListener;
 import spengergasse.at.ultiport.adapter.RequestsAdapter;
 import spengergasse.at.ultiport.database.DatabaseHandler;
 import spengergasse.at.ultiport.entities.TransportRequest;
-import spengergasse.at.ultiport.service.Constants;
-import spengergasse.at.ultiport.service.FcmVolley;
 import spengergasse.at.ultiport.service.RequestWebService;
-import spengergasse.at.ultiport.service.SharedPreference;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -155,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
             }
             case R.id.register_push:{
                 Intent intent = new Intent(this, RegisterForPushActivity.class);
+                intent.putExtra("userID", userID);
                 startActivity(intent);
             }
         }
