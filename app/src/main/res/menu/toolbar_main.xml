@@ -8,4 +8,9 @@
     <item
         android:id="@+id/action_administration"
         android:title="@string/toolbar_administration" />
+
+    <item
+        android:id="@+id/register_push"
+        android:title="Push Registrieren"
+        />
 </menu>

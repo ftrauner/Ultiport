@@ -32,30 +32,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
-    @Override
-    public void onNewToken(String token) {
-        Log.d(TAG, "Refreshed token: " + token);
-
-        // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
-        // Instance ID token to your app server.
-        sendRegistrationToServer(token);
-    }
-
-    public void onTokenRefresh() {
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG, "Refreshed token: " + refreshedToken);
-        storeToken(refreshedToken);
-    }
-
-    private void storeToken(String token) {
-        //saving the token on shared preferences
-        SharedPreference.getInstance(getApplicationContext()).saveDeviceToken(token);
-    }
-
-    private void sendRegistrationToServer(String token) {
-    }
-
     //this method will display the notification
     //We are passing the JSONObject that is received from
     //firebase cloud messaging

@@ -153,10 +153,14 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             }
+            case R.id.register_push:{
+                Intent intent = new Intent(this, RegisterForPushActivity.class);
+                startActivity(intent);
+            }
         }
         return true;
     }
-
+/*
     public void sendToken(View view) {
 
 
@@ -197,4 +201,5 @@ public class MainActivity extends AppCompatActivity {
         };
         FcmVolley.getInstance(this).addToRequestQueue(stringRequest);
     }
+    */
 }
