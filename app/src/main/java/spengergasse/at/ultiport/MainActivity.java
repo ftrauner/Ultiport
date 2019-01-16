@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -74,15 +75,11 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        Context context = getApplicationContext();
-                        CharSequence text = "Hello toast!";
-                        int duration = Toast.LENGTH_SHORT;
-
-                        Toast.makeText(context, text, duration).show();
+                        startActivity(new Intent(MainActivity.this,Pop.class));
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
-                        // do whatever
+
                     }
                 })
         );
