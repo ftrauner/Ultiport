@@ -2,6 +2,7 @@ package spengergasse.at.ultiport;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,12 @@ import android.view.View;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,7 +68,12 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        startActivity(new Intent(MainActivity.this,Pop.class));
+                        if(userGruppe.equals("3")){
+                            startActivity(new Intent(MainActivity.this,Pop.class));
+                        }
+
+
+
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -144,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
 /*
     public void sendToken(View view) {
 
