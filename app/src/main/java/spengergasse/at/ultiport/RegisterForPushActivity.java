@@ -42,13 +42,13 @@ public class RegisterForPushActivity extends AppCompatActivity {
 
 
     }
-    public void sendToken(View view) {
+    public void sendToken(View v) {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Registering Device...");
         progressDialog.show();
 
         final String token = SharedPreference.getInstance(this).getDeviceToken();
-        //final String email = editTextEmail.getText().toString();
+        final String id = String.valueOf(userID);
         System.out.println(token);
 
         if (token == null) {
@@ -81,7 +81,8 @@ public class RegisterForPushActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("token", token);
+                params.put("e_token", token);
+                params.put("e_id", id);
                 return params;
             }
         };

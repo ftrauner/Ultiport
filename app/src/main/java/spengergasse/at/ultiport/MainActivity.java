@@ -59,20 +59,36 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        if(userGruppe.equals("3") && mRequestList.get(position).getReqStatus().equals("1") && mRequestList.get(position).getReqTransporteur() == null){
-
-                            Intent intent = new Intent(MainActivity.this, Pop.class);
-                            intent.putExtra("request", mRequestList.get(position));
-                            intent.putExtra("userID", userID);
-                            startActivity(intent);
+                        if(userGruppe.equals("3")  ){
+                            if(mRequestList.get(position).getReqStatus().equals("1") && mRequestList.get(position).getReqTransporteur() == null) {
+                                Intent intent = new Intent(MainActivity.this, Pop.class);
+                                intent.putExtra("request", mRequestList.get(position));
+                                intent.putExtra("userID", userID);
+                                startActivity(intent);
+                            }
+                            else{
+                                Snackbar.make(findViewById(R.id.main_layout), R.string.main_in_progress, Snackbar.LENGTH_SHORT).show();
+                            }
                         }
-                        if(userGruppe.equals("3") && mRequestList.get(position).getReqStatus().equals("2") && mRequestList.get(position).getReqTransporteur().equals(String.valueOf(userID))){
-                            Intent intent = new Intent(MainActivity.this, PopAbschließen.class);
-                            intent.putExtra("request", mRequestList.get(position));
-                            intent.putExtra("userID", userID);
-                            startActivity(intent);
+                        else{
+                            Snackbar.make(findViewById(R.id.main_layout), R.string.main_keine_berechtigung, Snackbar.LENGTH_SHORT).show();
+                        }
+                        if(userGruppe.equals("3")){
+                            if(mRequestList.get(position).getReqStatus().equals("2") && mRequestList.get(position).getReqTransporteur().equals(String.valueOf(userID))) {
+                                Intent intent = new Intent(MainActivity.this, PopAbschließen.class);
+                                intent.putExtra("request", mRequestList.get(position));
+                                intent.putExtra("userID", userID);
+                                startActivity(intent);
+                            }
+                            else{
+                                Snackbar.make(findViewById(R.id.main_layout), R.string.main_in_progress, Snackbar.LENGTH_SHORT).show();
+                            }
+                        }
+                        else{
+                            Snackbar.make(findViewById(R.id.main_layout), R.string.main_keine_berechtigung, Snackbar.LENGTH_SHORT).show();
                         }
                     }
+
 
                     @Override public void onLongItemClick(View view, int position) {
 
@@ -86,7 +102,15 @@ public class MainActivity extends AppCompatActivity {
 
         RequestData();
     }
-
+/*
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+*/
     private void RequestData() {
 
         RequestWebService webService = RequestWebService.retrofit.create(RequestWebService.class);
@@ -132,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(this, AddRequestActivity.class);
                     intent.putExtra("userID", userID);
                     startActivity(intent);
+                    finish();
                 } else {
                     Snackbar.make(findViewById(R.id.main_layout), R.string.main_keine_berechtigung, Snackbar.LENGTH_SHORT).show();
                 }
@@ -146,11 +171,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             }
-            case R.id.register_push:{
-                Intent intent = new Intent(this, RegisterForPushActivity.class);
-                intent.putExtra("userID", userID);
+            case R.id.auftrag_akt: {
+                Intent intent = getIntent();
+                finish();
                 startActivity(intent);
             }
+
         }
         return true;
     }

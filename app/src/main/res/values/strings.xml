@@ -33,6 +33,7 @@
     <string name="admin_list">Liste aktualisieren</string>
     <string name="register_button">Benachrichtigungen aktivieren</string>
     <string name="main_accept_button">Annehmen</string>
+    <string name="main_in_progress">Auftrag wird schon bearbeitet</string>
 
     <string-array name="numbers">
         <item>Admin</item>
