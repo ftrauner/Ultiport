@@ -47,6 +47,9 @@ public class PopAbschließen extends Activity {
 
         BackGround b = new BackGround();
         b.execute(auftrag, transporteur);
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
     class BackGround extends AsyncTask<String, String, String> {

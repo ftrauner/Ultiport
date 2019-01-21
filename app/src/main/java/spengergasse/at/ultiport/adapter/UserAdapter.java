@@ -21,6 +21,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     //Interne User-Liste
     private Context mCtx;
     private List<User> mUsers;
+    private int i = 0;
 
     public UserAdapter(Context mCtx, List<User> mUsers){
         this.mCtx = mCtx;
