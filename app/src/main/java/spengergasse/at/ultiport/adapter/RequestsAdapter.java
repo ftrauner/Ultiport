@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -61,7 +63,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
         //Check zur Vermeidung von NullPointern, weiß nicht ob notwendig
         if(request != null) {
             //Setze GUI-Elemente auf Element im Holder
-            TextView requestStartOE = viewHolder.requestStartOE;
+            /*TextView requestStartOE = viewHolder.requestStartOE;
             requestStartOE.setText(request.getReqStartOE());
             TextView requestStartRaum = viewHolder.requestStartRaum;
             requestStartRaum.setText(request.getReqStartRaum());
@@ -69,10 +71,17 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
             requestEndOE.setText(request.getReqEndOE());
             TextView requestEndRaum = viewHolder.requestEndRaum;
             requestEndRaum.setText(request.getReqEndRaum());
-            TextView requestStartZeit = viewHolder.requestStartZeit;
+            TextView requestStartZeit = viewHolder.requestStartZeit;*/
             //requestStartZeit.setText(format.format(request.getReqStartZeit()));
-            TextView requestBeschr = viewHolder.requestBeschr;
-            requestBeschr.setText(request.getReqBeschr());
+            //TextView requestBeschr = viewHolder.requestBeschr;
+            //requestBeschr.setText(request.getReqBeschr());
+
+            String start = request.getReqStartOE()+request.getReqStartRaum();
+            String ende = request.getReqEndOE()+request.getReqEndRaum();
+            TextView requestStart = viewHolder.requestStart;
+            requestStart.setText(start);
+            TextView requestEnde = viewHolder.requestEnde;
+            requestEnde.setText(ende);
         }
     }
 
@@ -93,18 +102,20 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
         TextView requestEndRaum;
         TextView requestStartZeit;
         TextView requestBeschr;
+        TextView requestStart;
+        TextView requestEnde;
 
         //Konstruktor
         ViewHolder(View itemView) {
             super(itemView);
 
             //Setze die oben genannten Elemente auf die Layout-Elemente, definiert in res\layout\request_item.xml
-            requestStartOE = itemView.findViewById(R.id.request_startOE);
-            requestStartRaum = itemView.findViewById(R.id.request_startRaum);
-            requestEndOE = itemView.findViewById(R.id.request_endOE);
-            requestEndRaum = itemView.findViewById(R.id.request_endRaum);
-            requestStartZeit = itemView.findViewById(R.id.request_startZeit);
-            requestBeschr = itemView.findViewById(R.id.request_beschr);
+            requestStart = itemView.findViewById(R.id.request_start);
+            //requestStartRaum = itemView.findViewById(R.id.request_startRaum);
+            requestEnde = itemView.findViewById(R.id.request_ende);
+            //requestEndRaum = itemView.findViewById(R.id.request_endRaum);
+            //requestStartZeit = itemView.findViewById(R.id.request_startZeit);
+            //requestBeschr = itemView.findViewById(R.id.request_beschr);
         }
     }
 }
