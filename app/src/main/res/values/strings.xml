@@ -36,6 +36,10 @@
     <string name="main_in_progress">Auftrag wird schon bearbeitet</string>
     <string name="request_art_desc">Auftragsart</string>
     <string name="request_info_label">Transportanfrage</string>
+    <string name="add_request_success">Auftrag erfolgreich erstellt</string>
+    <string name="add_user_success">Benutzer erfolgreich gespeichert</string>
+    <string name="delete_user_success">Benutzer erfolgreich gelöscht</string>
+    <string name="edit_user_success">Benutzer erfolgreich geändert</string>
 
     <string-array name="numbers">
         <item>Admin</item>

@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override public void onItemClick(View view, int position) {
                         if(userGruppe.equals("3")  ){
                             if(mRequestList.get(position).getReqStatus().equals("1") && mRequestList.get(position).getReqTransporteur()==0) {
-                                Intent intent = new Intent(MainActivity.this, Pop.class);
+                                Intent intent = new Intent(MainActivity.this, RequestInfoActivity.class);
                                 intent.putExtra("request", mRequestList.get(position));
                                 intent.putExtra("userID", userID);
                                 startActivity(intent);
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                                 Snackbar.make(findViewById(R.id.main_layout), R.string.main_in_progress, Snackbar.LENGTH_SHORT).show();
                             }
                             if(mRequestList.get(position).getReqStatus().equals("2") && mRequestList.get(position).getReqTransporteur()==userID) {
-                                Intent intent = new Intent(MainActivity.this, PopAbschließen.class);
+                                Intent intent = new Intent(MainActivity.this, RequestInfoActivity.class);
                                 intent.putExtra("request", mRequestList.get(position));
                                 intent.putExtra("userID", userID);
                                 startActivity(intent);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -315,9 +315,9 @@ public class AddRequestActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if(s.equals("")){
-                s="Data saved successfully.";
+                s=getString(R.string.add_request_success);
             }
-            Toast.makeText(ctx, s, Toast.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.add_request_layout),s,Snackbar.LENGTH_SHORT);
         }
     }
 

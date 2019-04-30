@@ -2,6 +2,7 @@ package spengergasse.at.ultiport;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -118,9 +119,9 @@ public class EditUserActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if(s.equals("")){
-                s="Data updated successfully.";
+                s=getString(R.string.edit_user_success);
             }
-            Toast.makeText(ctx, s, Toast.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.edit_user_layout),s,Snackbar.LENGTH_SHORT);
         }
     }
 }

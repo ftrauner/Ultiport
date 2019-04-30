@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/Theme.AppCompat.Light"
+    android:id="@+id/edit_user_layout"
     tools:context=".EditUserActivity">
 
     <android.support.v7.widget.Toolbar

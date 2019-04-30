@@ -3,6 +3,7 @@ package spengergasse.at.ultiport;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -81,9 +82,9 @@ public class DeleteUserActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if(s.equals("")){
-                s="Data deleted successfully.";
+                s=getString(R.string.delete_user_success);
             }
-            Toast.makeText(ctx, s, Toast.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.delete_user_layout),s,Snackbar.LENGTH_SHORT);
         }
     }
 
