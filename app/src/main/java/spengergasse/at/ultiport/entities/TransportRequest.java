@@ -16,7 +16,7 @@ public class TransportRequest implements Parcelable {
     //Ersteller des Auftrags, wird mitgespeichert beim Erstellen (aktiver User)
     @SerializedName("a_e_anf")
     @Expose
-    private String reqAnforderer;
+    private int reqAnforderer;
     //Start-Raum beim Erstellen festgelegt
     @SerializedName("a_r_start")
     @Expose
@@ -52,25 +52,25 @@ public class TransportRequest implements Parcelable {
     //Zuständiger Transporteur, ist zunächst null und wird beim Annehmen des Auftrags auf den Trasnporteur gesetzt
     @SerializedName("a_e_trans")
     @Expose
-    private String reqTransporteur;
+    private int reqTransporteur;
     //Beschreibung des Auftrags, wird beim Erstellen eingegeben
     @SerializedName("a_beschr")
     @Expose
     private String reqBeschr;
 
     //Konstruktor
-    public TransportRequest(String reqAnforderer, String reqStartRaum, String reqEndRaum, String reqStartOE, String reqEndOE, String reqArt, String reqStatus, String reqStartZeit, String reqEndZeit, String reqTransporteur, String reqBeschr) {
+    public TransportRequest(int reqAnforderer, String reqStartRaum, String reqEndRaum, String reqStartOE, String reqEndOE, String reqStatus, String reqStartZeit, String reqEndZeit, int reqTransporteur, String reqBeschr, String reqArt) {
         this.reqAnforderer = reqAnforderer;
         this.reqStartRaum = reqStartRaum;
         this.reqEndRaum = reqEndRaum;
         this.reqStartOE = reqStartOE;
         this.reqEndOE = reqEndOE;
-        this.reqArt = reqArt;
         this.reqStatus = reqStatus;
         this.reqStartZeit = reqStartZeit;
         this.reqEndZeit = reqEndZeit;
         this.reqTransporteur = reqTransporteur;
         this.reqBeschr = reqBeschr;
+        this.reqArt = reqArt;
     }
 
     //Konstruktor für Parcelable zur Datenübergabe zwischen Activities
@@ -85,6 +85,7 @@ public class TransportRequest implements Parcelable {
         reqStartRaum = in.readString();
         reqEndOE = in.readString();
         reqEndRaum = in.readString();
+        reqArt = in.readString();
 
     }
 
@@ -119,19 +120,19 @@ public class TransportRequest implements Parcelable {
         this.reqBeschr = reqBeschr;
     }
 
-    public String getReqAnforderer() {
+    public int getReqAnforderer() {
         return reqAnforderer;
     }
 
-    public void setReqAnforderer(String reqAnforderer) {
+    public void setReqAnforderer(int reqAnforderer) {
         this.reqAnforderer = reqAnforderer;
     }
 
-    public String getReqTransporteur() {
+    public int getReqTransporteur() {
         return reqTransporteur;
     }
 
-    public void setReqTransporteur(String reqTransporteur) {
+    public void setReqTransporteur(int reqTransporteur) {
         this.reqTransporteur = reqTransporteur;
     }
 
@@ -216,7 +217,7 @@ public class TransportRequest implements Parcelable {
         //Übergebe Zeit
         dest.writeString(this.reqStatus);
         dest.writeString(this.reqStartZeit);
-
+        dest.writeString(this.reqArt);
 
     }
 }

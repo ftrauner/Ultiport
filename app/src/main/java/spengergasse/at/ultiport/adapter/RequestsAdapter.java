@@ -1,11 +1,15 @@
 package spengergasse.at.ultiport.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -14,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import spengergasse.at.ultiport.MainActivity;
 import spengergasse.at.ultiport.R;
 import spengergasse.at.ultiport.entities.TransportRequest;
 
@@ -52,6 +57,23 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
         return new ViewHolder(requestView);
     }
 
+    private void MachSchoenBunt(ViewHolder viewHolder, TransportRequest request){
+        switch(request.getReqStatus()){
+            //erstellt
+            case "1": {
+                viewHolder.itemView.setBackgroundColor(Color.parseColor("#33CC33"));
+                break;
+            }
+            //aktiv
+            case "2": {
+                if(request.getReqTransporteur() == MainActivity.userID) {
+                    viewHolder.itemView.setBackgroundColor(Color.parseColor("#ffff00"));
+                }
+                break;
+            }
+        }
+    }
+
     //Update des ViewHolders der Liste
     @Override
     public void onBindViewHolder(@NonNull RequestsAdapter.ViewHolder viewHolder, int position) {
@@ -82,6 +104,26 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
             requestStart.setText(start);
             TextView requestEnde = viewHolder.requestEnde;
             requestEnde.setText(ende);
+            ImageView requestBild = viewHolder.requestBild;
+
+            switch(request.getReqArt()){
+                //Rollstuhl
+                case "1": {
+                    requestBild.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_patient));
+                    break;
+                }
+                //Laborprobe
+                case "2": {
+                    requestBild.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_laborprobe));
+                    break;
+                }
+                //Bett
+                case "3": {
+                    requestBild.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_bett));
+                    break;
+                }
+            }
+            MachSchoenBunt(viewHolder,request);
         }
     }
 
@@ -104,6 +146,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
         TextView requestBeschr;
         TextView requestStart;
         TextView requestEnde;
+        ImageView requestBild;
 
         //Konstruktor
         ViewHolder(View itemView) {
@@ -116,6 +159,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.ViewHo
             //requestEndRaum = itemView.findViewById(R.id.request_endRaum);
             //requestStartZeit = itemView.findViewById(R.id.request_startZeit);
             //requestBeschr = itemView.findViewById(R.id.request_beschr);
+            requestBild = itemView.findViewById(R.id.request_bild);
         }
     }
 }

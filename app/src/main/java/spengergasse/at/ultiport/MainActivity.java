@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static String userGruppe = null;
-    int userID;
+    public static int userID;
 
     List<TransportRequest> mRequestList;
     RecyclerView mRecyclerView;
@@ -53,14 +53,16 @@ public class MainActivity extends AppCompatActivity {
         userID = intentLogIn.getIntExtra("userID", 0);
 
         RequestsAdapter adapter = new RequestsAdapter();
+
         mRecyclerView = findViewById(R.id.requestList);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
                         if(userGruppe.equals("3")  ){
-                            if(mRequestList.get(position).getReqStatus().equals("1") && mRequestList.get(position).getReqTransporteur() == null) {
+                            if(mRequestList.get(position).getReqStatus().equals("1") && mRequestList.get(position).getReqTransporteur()==0) {
                                 Intent intent = new Intent(MainActivity.this, Pop.class);
                                 intent.putExtra("request", mRequestList.get(position));
                                 intent.putExtra("userID", userID);
@@ -69,12 +71,7 @@ public class MainActivity extends AppCompatActivity {
                             else{
                                 Snackbar.make(findViewById(R.id.main_layout), R.string.main_in_progress, Snackbar.LENGTH_SHORT).show();
                             }
-                        }
-                        else{
-                            Snackbar.make(findViewById(R.id.main_layout), R.string.main_keine_berechtigung, Snackbar.LENGTH_SHORT).show();
-                        }
-                        if(userGruppe.equals("3")){
-                            if(mRequestList.get(position).getReqStatus().equals("2") && mRequestList.get(position).getReqTransporteur().equals(String.valueOf(userID))) {
+                            if(mRequestList.get(position).getReqStatus().equals("2") && mRequestList.get(position).getReqTransporteur()==userID) {
                                 Intent intent = new Intent(MainActivity.this, PopAbschließen.class);
                                 intent.putExtra("request", mRequestList.get(position));
                                 intent.putExtra("userID", userID);
@@ -129,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<TransportRequest[]> call, Throwable t) {
                 System.out.println("GEHT NICHT!");
+                System.out.println(t.getMessage());
             }
         });
     }

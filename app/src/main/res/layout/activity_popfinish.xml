@@ -15,7 +15,7 @@
         android:layout_marginEnd="140dp"
         android:layout_marginRight="140dp"
         android:layout_marginBottom="292dp"
-        android:onClick="abschliessen"
+        android:onClick="Abschliessen"
         android:text="Abschliessen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

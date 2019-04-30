@@ -14,8 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".RegisterForPushActivity"></activity>
-
+        <activity android:name=".RequestInfoActivity"
+            android:label="@string/request_info_label"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".RegisterForPushActivity" />
 
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
@@ -39,41 +41,26 @@
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
                 android:value="default_channel_id" />
         </service>
-
-
-        <service android:name=".service.MyFirebaseInstanceIDService"
+        <service
+            android:name=".service.MyFirebaseInstanceIDService"
             android:permission="true">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-        <service android:name="service.MyFirebaseMessagingService"
+        <service
+            android:name="service.MyFirebaseMessagingService"
             android:permission="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-
-
-
-
-
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
-
-
-
-
-
-
-
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -81,14 +68,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
-
-
-
-
-
         <activity
             android:name=".AddRequestActivity"
             android:label="@string/add_request_label"
@@ -112,16 +91,13 @@
         <activity
             android:name=".Pop"
             android:label="Auftrag akzeptieren"
-        android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.CustomTheme"
-            />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".PopAbschließen"
             android:label="Auftrag abschliessen"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.CustomTheme"
-            />
-
+            android:theme="@style/AppTheme.CustomTheme" />
     </application>
 
 </manifest>

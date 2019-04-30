@@ -6,7 +6,7 @@
     <string name="logo_ultiport">Logo Ultiport</string>
     <string name="logo_parabel">Logo Parabel</string>
     <string name="login_passwort">Passwort</string>
-    <string name="login_click">Einloggen</string>
+    <string name="login_click">Anmelden</string>
     <string name="add_request_label">Transportanfrage erstellen</string>
     <string name="add_user_label">Benutzer erstellen</string>
     <string name="edit_user_label">Benutzer bearbeiten</string>
@@ -34,6 +34,8 @@
     <string name="register_button">Benachrichtigungen aktivieren</string>
     <string name="main_accept_button">Annehmen</string>
     <string name="main_in_progress">Auftrag wird schon bearbeitet</string>
+    <string name="request_art_desc">Auftragsart</string>
+    <string name="request_info_label">Transportanfrage</string>
 
     <string-array name="numbers">
         <item>Admin</item>
