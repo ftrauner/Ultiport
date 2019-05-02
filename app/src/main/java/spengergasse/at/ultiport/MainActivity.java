@@ -1,6 +1,8 @@
 package spengergasse.at.ultiport;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         DatabaseHandler databaseHandler = new DatabaseHandler(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences prefs = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
         Toolbar main_toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(main_toolbar);
@@ -48,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intentLogIn = getIntent();
         //Übergebene Nutzergruppe als String speichern
         //Setze static Parameter zur Überprüfung der Berechtigung
-        userGruppe = LoginActivity.GRUPPE;
-
-        userID = intentLogIn.getIntExtra("userID", 0);
+        userGruppe = prefs.getString("userGruppe", LoginActivity.GRUPPE);
+        userID = intentLogIn.getIntExtra("userID", prefs.getInt("userID",0));
 
         RequestsAdapter adapter = new RequestsAdapter();
 

@@ -1,6 +1,7 @@
 package spengergasse.at.ultiport;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -121,7 +122,7 @@ public class EditUserActivity extends AppCompatActivity {
             if(s.equals("")){
                 s=getString(R.string.edit_user_success);
             }
-            Snackbar.make(findViewById(R.id.edit_user_layout),s,Snackbar.LENGTH_SHORT);
+            Snackbar.make(findViewById(R.id.edit_user_layout),s,Snackbar.LENGTH_SHORT).show();
         }
     }
 }

@@ -42,13 +42,13 @@
     <string name="edit_user_success">Benutzer erfolgreich geändert</string>
 
     <string-array name="numbers">
-        <item>Admin</item>
-        <item>Requester</item>
+        <item>Administrator</item>
+        <item>Anforderer</item>
         <item>Transporteur</item>
     </string-array>
 
     <string-array name="ArtDesTransports">
-        <item>Patient</item>
+        <item>Rollstuhl</item>
         <item>Probe</item>
         <item>Bett</item>
     </string-array>

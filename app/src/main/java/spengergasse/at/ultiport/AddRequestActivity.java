@@ -154,8 +154,6 @@ public class AddRequestActivity extends AppCompatActivity {
             return null;
         }
 
-
-
         protected void onPostExecute(Void result) {
             oeBez.addAll(SpinnerList);
             oeRaum.addAll(SpinnerRoomList);
@@ -186,7 +184,7 @@ public class AddRequestActivity extends AppCompatActivity {
         if (zielOE.getSelectedItem().toString().equals("C-Gebaeude")) {
             ZielOE = "3";
         }
-        if(requestArt.getSelectedItem().toString().equals("Patient")){
+        if(requestArt.getSelectedItem().toString().equals("Rollstuhl")){
             RequestArt = "1";
         }
         if(requestArt.getSelectedItem().toString().equals("Probe")){
@@ -256,16 +254,11 @@ public class AddRequestActivity extends AppCompatActivity {
             return null;
         }
 
-
-
         protected void onPostExecute(Void result) {
             oeRaum.addAll(SpinnerRoomList);
             adapterRaum.notifyDataSetChanged();
         }
     }
-
-
-
 
     class BackGround extends AsyncTask<String, String, String> {
 
@@ -317,11 +310,9 @@ public class AddRequestActivity extends AppCompatActivity {
             if(s.equals("")){
                 s=getString(R.string.add_request_success);
             }
-            Snackbar.make(findViewById(R.id.add_request_layout),s,Snackbar.LENGTH_SHORT);
+            Snackbar.make(findViewById(R.id.add_request_layout),s,Snackbar.LENGTH_SHORT).show();
         }
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -335,5 +326,4 @@ public class AddRequestActivity extends AppCompatActivity {
         }
         return true;
     }
-
 }

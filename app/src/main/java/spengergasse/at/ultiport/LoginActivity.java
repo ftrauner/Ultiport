@@ -2,6 +2,7 @@ package spengergasse.at.ultiport;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -110,6 +111,13 @@ public class LoginActivity extends AppCompatActivity {
                 //Übergebe Nutzergruppe
                 ma.putExtra("userGruppe",GRUPPE);
                 ma.putExtra("userID", ID);
+
+                //Speichere Info
+                SharedPreferences prefs = LoginActivity.this.getSharedPreferences("userInfo",Context.MODE_PRIVATE);
+                prefs.edit().putInt("userID",ID).apply();
+                prefs.edit().putString("userGruppe",GRUPPE).apply();
+
+
                 //Starte MainActivity
                 startActivity(ma);
             /*

@@ -1,6 +1,7 @@
 package spengergasse.at.ultiport;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -84,7 +85,7 @@ public class DeleteUserActivity extends AppCompatActivity {
             if(s.equals("")){
                 s=getString(R.string.delete_user_success);
             }
-            Snackbar.make(findViewById(R.id.delete_user_layout),s,Snackbar.LENGTH_SHORT);
+            Snackbar.make(findViewById(R.id.delete_user_layout),s,Snackbar.LENGTH_SHORT).show();
         }
     }
 
