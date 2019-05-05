@@ -12,6 +12,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import spengergasse.at.ultiport.entities.TransportRequest;
 
 public interface RequestWebService {
@@ -34,5 +35,5 @@ public interface RequestWebService {
     Call<TransportRequest[]> requests();
 
     @GET(REQUEST_GET)
-    Call<TransportRequest> request();
+    Call<TransportRequest> request(@Query("nummer") int nummer);
 }

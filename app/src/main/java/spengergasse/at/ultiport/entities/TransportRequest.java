@@ -15,62 +15,48 @@ public class TransportRequest implements Parcelable {
     private int reqNummer;
     //Ersteller des Auftrags, wird mitgespeichert beim Erstellen (aktiver User)
     @SerializedName("a_e_anf")
-    @Expose
     private int reqAnforderer;
     //Start-Raum beim Erstellen festgelegt
     @SerializedName("a_r_start")
-    @Expose
     private String reqStartRaum;
     //Ziel-Raum beim Erstellen festgelegt
     @SerializedName("a_r_ziel")
-    @Expose
     private String reqEndRaum;
     //Start-Organisationseinheit beim Erstellen festgelegt
     @SerializedName("a_oe_start")
-    @Expose
     private String reqStartOE;
     //Ziel-Organisationseinheit beim Erstellen festgelegt
     @SerializedName("a_oe_ende")
-    @Expose
     private String reqEndOE;
     //Art des Transports
     @SerializedName("a_o_id")
-    @Expose
     private String reqArt;
     //Status 1= Erstellt 2= In Arbeit 3= Abgeschlossen
     @SerializedName("a_s_status")
-    @Expose
     private String reqStatus;
     //Datum und Uhrzeit des Erstellens, wird mitgespeichert beim Erstellen
     @SerializedName("a_startzeit")
-    @Expose
     private String reqStartZeit;
     //Datum und Uhrzeit des Abschlusses
     @SerializedName("a_endzeit")
-    @Expose
     private String reqEndZeit;
     //Zuständiger Transporteur, ist zunächst null und wird beim Annehmen des Auftrags auf den Trasnporteur gesetzt
     @SerializedName("a_e_trans")
-    @Expose
     private int reqTransporteur;
     //Beschreibung des Auftrags, wird beim Erstellen eingegeben
     @SerializedName("a_beschr")
-    @Expose
     private String reqBeschr;
 
-    //Konstruktor
-    public TransportRequest(int reqAnforderer, String reqStartRaum, String reqEndRaum, String reqStartOE, String reqEndOE, String reqStatus, String reqStartZeit, String reqEndZeit, int reqTransporteur, String reqBeschr, String reqArt) {
-        this.reqAnforderer = reqAnforderer;
+    public TransportRequest(int reqNummer, String reqStartRaum, String reqEndRaum, String reqStartOE, String reqEndOE, String reqArt, String reqStatus, int reqTransporteur, String reqBeschr) {
+        this.reqNummer = reqNummer;
         this.reqStartRaum = reqStartRaum;
         this.reqEndRaum = reqEndRaum;
         this.reqStartOE = reqStartOE;
         this.reqEndOE = reqEndOE;
+        this.reqArt = reqArt;
         this.reqStatus = reqStatus;
-        this.reqStartZeit = reqStartZeit;
-        this.reqEndZeit = reqEndZeit;
         this.reqTransporteur = reqTransporteur;
         this.reqBeschr = reqBeschr;
-        this.reqArt = reqArt;
     }
 
     //Konstruktor für Parcelable zur Datenübergabe zwischen Activities

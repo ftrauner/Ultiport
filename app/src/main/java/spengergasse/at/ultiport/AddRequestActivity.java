@@ -2,6 +2,7 @@ package spengergasse.at.ultiport;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -61,16 +63,16 @@ public class AddRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_request);
         requestArt = findViewById(R.id.requestArt);
-        startortOE = (Spinner)findViewById(R.id.requestStartOE);
-        startraum = (Spinner)findViewById(R.id.requestStartRaum);
-        zielOE = (Spinner)findViewById(R.id.requestZielOE);
-        zielraum = (Spinner)findViewById(R.id.requestZielRaum);
-        requestText = (EditText)findViewById(R.id.requestText);
+        startortOE = findViewById(R.id.requestStartOE);
+        startraum = findViewById(R.id.requestStartRaum);
+        zielOE = findViewById(R.id.requestZielOE);
+        zielraum = findViewById(R.id.requestZielRaum);
+        requestText = findViewById(R.id.requestText);
 
-        adapterSpinner=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,oeBez);
+        adapterSpinner= new ArrayAdapter<>(this, R.layout.spinner_layout, R.id.txt, oeBez);
         startortOE.setAdapter(adapterSpinner);
 
-        adapterRaum=new ArrayAdapter<String>(this,R.layout.spinner_layout,R.id.txt,oeRaum);
+        adapterRaum= new ArrayAdapter<>(this, R.layout.spinner_layout, R.id.txt, oeRaum);
         startraum.setAdapter(adapterRaum);
         zielraum.setAdapter(adapterRaum);
         zielOE.setAdapter(adapterSpinner);
@@ -81,8 +83,10 @@ public class AddRequestActivity extends AppCompatActivity {
 
         requestArt.setAdapter(adapterA);
 
+        SharedPreferences prefs = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         Intent intentMain = getIntent();
-        userID = intentMain.getIntExtra("userID", 0);
+        userID = intentMain.getIntExtra("userID", prefs.getInt("userID",0));
+
 
         Toolbar administration_toolbar = findViewById(R.id.add_request_toolbar);
         setSupportActionBar(administration_toolbar);
@@ -166,22 +170,22 @@ public class AddRequestActivity extends AppCompatActivity {
         Anforderer = String.valueOf(userID);
         Startraum = startraum.getSelectedItem().toString();
         Zielraum = zielraum.getSelectedItem().toString();
-        if(startortOE.getSelectedItem().toString().equals("A-Gebaeude")){
+        if(startortOE.getSelectedItem().toString().equals("A")){
             StartortOE = "1";
         }
-        if(startortOE.getSelectedItem().toString().equals("B-Gebaeude")){
+        if(startortOE.getSelectedItem().toString().equals("B")){
             StartortOE = "2";
         }
-        if(startortOE.getSelectedItem().toString().equals("C-Gebaeude")){
+        if(startortOE.getSelectedItem().toString().equals("C")){
             StartortOE = "3";
         }
-        if (zielOE.getSelectedItem().toString().equals("A-Gebaeude")) {
+        if (zielOE.getSelectedItem().toString().equals("A")) {
             ZielOE = "1";
         }
-        if (zielOE.getSelectedItem().toString().equals("B-Gebaeude")) {
+        if (zielOE.getSelectedItem().toString().equals("B")) {
             ZielOE = "2";
         }
-        if (zielOE.getSelectedItem().toString().equals("C-Gebaeude")) {
+        if (zielOE.getSelectedItem().toString().equals("C")) {
             ZielOE = "3";
         }
         if(requestArt.getSelectedItem().toString().equals("Rollstuhl")){

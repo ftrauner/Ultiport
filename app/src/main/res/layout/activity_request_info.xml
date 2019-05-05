@@ -109,6 +109,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:text="@string/main_accept_button"
+        android:onClick="Akzeptieren"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/request_info_abschliessen"
         app:layout_constraintStart_toStartOf="parent" />
@@ -122,6 +124,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
+        android:text="@string/main_finish_button"
+        android:onClick="Abschliessen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/request_info_annehmen" />
