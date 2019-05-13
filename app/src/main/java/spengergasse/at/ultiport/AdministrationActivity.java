@@ -3,7 +3,9 @@ package spengergasse.at.ultiport;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +27,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +51,7 @@ public class AdministrationActivity extends AppCompatActivity {
     private List<User> userList;
     private RecyclerView recyclerView;
     private UserAdapter uAdapter;
+    private String ID_TO_DEL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +79,7 @@ public class AdministrationActivity extends AppCompatActivity {
 
             }
             @Override
-            public void onLongItemClick(View view, int position) {
+            public void onLongItemClick(View view, final int position) {
                 PopupMenu popupMenu = new PopupMenu(AdministrationActivity.this,view);
                 popupMenu.getMenuInflater().inflate(R.menu.user_popup_menu,popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -87,12 +96,53 @@ public class AdministrationActivity extends AppCompatActivity {
                                         .setMessage(R.string.admin_loeschen_dialog)
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
-                                                // Hier Benutzer löschen
+                                                BackGround b = new BackGround();
+                                                b.execute(userList.get(position).getId());
+                                            }
+
+                                            class BackGround extends AsyncTask<String, String, String> {
+
+                                                @Override
+                                                protected String doInBackground(String... params) {
+                                                    String id = params[0];
+                                                    String data="";
+                                                    int tmp;
+
+                                                    try {
+                                                        URL url = new URL("http://ultiport.htl5.org/DeleteUser.php");
+                                                        String urlParams = "e_id="+id;
+
+                                                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                                                        httpURLConnection.setDoOutput(true);
+                                                        OutputStream os = httpURLConnection.getOutputStream();
+                                                        os.write(urlParams.getBytes());
+                                                        os.flush();
+                                                        os.close();
+                                                        InputStream is = httpURLConnection.getInputStream();
+                                                        while((tmp=is.read())!=-1){
+                                                            data+= (char)tmp;
+                                                        }
+                                                        is.close();
+                                                        httpURLConnection.disconnect();
+
+                                                        return data;
+
+                                                    } catch (MalformedURLException e) {
+                                                        e.printStackTrace();
+                                                        return "Exception: "+e.getMessage();
+                                                    } catch (IOException e) {
+                                                        e.printStackTrace();
+                                                        return "Exception: "+e.getMessage();
+                                                    }
+                                                }
+
+
                                             }
                                         })
                                         .setNegativeButton(android.R.string.no, null)
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .show();
+
                             }
                         }
                         return true;
@@ -101,6 +151,8 @@ public class AdministrationActivity extends AppCompatActivity {
                 popupMenu.show();
             }
         }));
+
+
 
         //UserAdapter mAdapter = new UserAdapter()
         //UserAdapter userAdapter = new UserAdapter(***userliste***);
