@@ -41,6 +41,9 @@
     <string name="add_user_success">Benutzer erfolgreich gespeichert</string>
     <string name="delete_user_success">Benutzer erfolgreich gelöscht</string>
     <string name="edit_user_success">Benutzer erfolgreich geändert</string>
+    <string name="request_info_start">Start: </string>
+    <string name="request_info_ziel">Ziel: </string>
+    <string name="request_info_beschr">Beschreibung: </string>
 
     <string-array name="numbers">
         <item>Administrator</item>

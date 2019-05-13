@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -70,10 +71,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("userID", userID);
                                 startActivity(intent);
                             }
-                            else{
-                                Snackbar.make(findViewById(R.id.main_layout), R.string.main_in_progress, Snackbar.LENGTH_SHORT).show();
-                            }
-                            if(mRequestList.get(position).getReqStatus().equals("2") && mRequestList.get(position).getReqTransporteur()==userID) {
+                            else if(mRequestList.get(position).getReqStatus().equals("2") && mRequestList.get(position).getReqTransporteur()==userID) {
                                 Intent intent = new Intent(MainActivity.this, RequestInfoActivity.class);
                                 intent.putExtra("request", mRequestList.get(position));
                                 intent.putExtra("userID", userID);
@@ -117,8 +115,9 @@ public class MainActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<TransportRequest[]>() {
             @Override
-            public void onResponse(Call<TransportRequest[]> call, retrofit2.Response<TransportRequest[]> response) {
+            public void onResponse(@NonNull Call<TransportRequest[]> call, @NonNull retrofit2.Response<TransportRequest[]> response) {
                 TransportRequest[] transportRequests = response.body();
+                assert transportRequests != null;
                 mRequestList = Arrays.asList(transportRequests);
                 DisplayData();
                 System.out.println(response.code());
@@ -126,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<TransportRequest[]> call, Throwable t) {
+            public void onFailure(@NonNull Call<TransportRequest[]> call, @NonNull Throwable t) {
                 System.out.println("GEHT NICHT!");
                 System.out.println(t.getMessage());
             }

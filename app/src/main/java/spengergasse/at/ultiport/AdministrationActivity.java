@@ -86,7 +86,7 @@ public class AdministrationActivity extends AppCompatActivity {
                                 break;
                             }
                         }
-                        return false;
+                        return true;
                     }
                 });
             }

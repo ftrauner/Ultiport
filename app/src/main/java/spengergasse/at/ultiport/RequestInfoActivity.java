@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,8 @@ public class RequestInfoActivity extends AppCompatActivity {
     static TransportRequest transportRequest;
     static TransportRequest request_main;
     ImageView request_info_art;
-    TextView request_info_start, request_info_ende, request_info_beschreibung, request_info_anf_name;
+    TextView request_info_start, request_info_ende, request_info_beschreibung;
+    Button request_annehmen_button, request_abschliessen_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,8 @@ public class RequestInfoActivity extends AppCompatActivity {
         request_info_start = findViewById(R.id.request_info_start);
         request_info_ende = findViewById(R.id.request_info_ende);
         request_info_beschreibung = findViewById(R.id.request_info_beschreibung);
-        request_info_anf_name = findViewById(R.id.request_info_anf_name);
+        request_annehmen_button = findViewById(R.id.request_info_annehmen);
+        request_abschliessen_button = findViewById(R.id.request_info_abschliessen);
 
         Toolbar requestInfo_toolbar = findViewById(R.id.requestinfo_toolbar);
         setSupportActionBar(requestInfo_toolbar);
@@ -67,14 +70,14 @@ public class RequestInfoActivity extends AppCompatActivity {
         Call<TransportRequest> call = webService.request(request_main.getReqNummer());
         call.enqueue(new Callback<TransportRequest>() {
             @Override
-            public void onResponse(Call<TransportRequest> call, Response<TransportRequest> response) {
+            public void onResponse(@NonNull Call<TransportRequest> call, @NonNull Response<TransportRequest> response) {
                 transportRequest = response.body();
                 DisplayData();
                 System.out.println(response.code());
             }
 
             @Override
-            public void onFailure(Call<TransportRequest> call, Throwable t) {
+            public void onFailure(@NonNull Call<TransportRequest> call, @NonNull Throwable t) {
                 System.out.println(t.getMessage());
             }
         });
@@ -99,27 +102,38 @@ public class RequestInfoActivity extends AppCompatActivity {
                     break;
                 }
             }
-            String start = transportRequest.getReqStartOE()+transportRequest.getReqStartRaum();
-            String ende = transportRequest.getReqEndOE()+transportRequest.getReqEndRaum();
+            switch (transportRequest.getReqStatus()){
+                case "1": {
+                    request_abschliessen_button.setEnabled(false);
+                    break;
+                }
+                case "2": {
+                    request_annehmen_button.setEnabled(false);
+                    break;
+                }
+            }
+            String start = getText(R.string.request_info_start)+transportRequest.getReqStartOE()+transportRequest.getReqStartRaum();
+            String ende = getText(R.string.request_info_ziel)+transportRequest.getReqEndOE()+transportRequest.getReqEndRaum();
+            String beschr = getText(R.string.request_info_beschr)+transportRequest.getReqBeschr();
             request_info_start.setText(start);
             request_info_ende.setText(ende);
-            request_info_beschreibung.setText(transportRequest.getReqBeschr());
-        }
-        else{
-            System.out.println("äääähhhhh");
+            request_info_beschreibung.setText(beschr);
         }
     }
 
     public void Akzeptieren(View v) {
         BackGround b = new BackGround();
         b.execute(auftragID, transporteurID);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
     public void Abschliessen(View v) {
         BackGroundFinish b = new BackGroundFinish();
         b.execute(auftragID, transporteurID);
-        Intent intent = getIntent();
-        finish();
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     class BackGround extends AsyncTask<String, String, String> {
