@@ -44,6 +44,7 @@
     <string name="request_info_start">Start: </string>
     <string name="request_info_ziel">Ziel: </string>
     <string name="request_info_beschr">Beschreibung: </string>
+    <string name="admin_loeschen_dialog">Wirklich den Benutzer löschen?</string>
 
     <string-array name="numbers">
         <item>Administrator</item>

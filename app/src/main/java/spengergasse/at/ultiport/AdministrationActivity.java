@@ -1,8 +1,10 @@
 package spengergasse.at.ultiport;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -81,9 +83,16 @@ public class AdministrationActivity extends AppCompatActivity {
                                 break;
                             }
                             case R.id.item_delete_user: {
-                                Intent intent = new Intent(AdministrationActivity.this, DeleteUserActivity.class);
-                                startActivity(intent);
-                                break;
+                                AlertDialog dialog = new AlertDialog.Builder(AdministrationActivity.this)
+                                        .setMessage(R.string.admin_loeschen_dialog)
+                                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                // Hier Benutzer löschen
+                                            }
+                                        })
+                                        .setNegativeButton(android.R.string.no, null)
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .show();
                             }
                         }
                         return true;
