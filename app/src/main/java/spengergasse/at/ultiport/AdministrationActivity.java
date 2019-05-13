@@ -88,6 +88,7 @@ public class AdministrationActivity extends AppCompatActivity {
                         switch (menuItem.getItemId()){
                             case R.id.item_edit_user: {
                                 Intent intent = new Intent(AdministrationActivity.this, EditUserActivity.class);
+                                intent.putExtra("selectedID",userList.get(position).getId());
                                 startActivity(intent);
                                 break;
                             }

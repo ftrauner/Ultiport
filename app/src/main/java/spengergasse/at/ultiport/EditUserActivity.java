@@ -3,6 +3,7 @@ package spengergasse.at.ultiport;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,12 +21,19 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import spengergasse.at.ultiport.entities.User;
+import spengergasse.at.ultiport.service.UserWebService;
+
 public class EditUserActivity extends AppCompatActivity {
 
+    User user;
     EditText  id, name, password, vorname, benutzername;
     Spinner gruppe;
     String Id,Name, Password, Vorname, Benutzername, Gruppe;
-    //int Id;
+    int userID;
     Context ctx=this;
 
     @Override
@@ -33,26 +41,31 @@ public class EditUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
 
+        Intent intent = getIntent();
+        userID = intent.getIntExtra("selectedID",0);
+
         Toolbar deleteUserToolbar = findViewById(R.id.edit_user_toolbar);
         setSupportActionBar(deleteUserToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        Spinner spinner = findViewById(R.id.edit_benutzer_gruppe);
+        //Spinner spinner = findViewById(R.id.edit_benutzer_gruppe);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.numbers, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        //spinner.setAdapter(adapter);
 
 
-        id = (EditText) findViewById(R.id.edit_benutzer_id);
-        name = (EditText) findViewById(R.id.edit_benutzer_nachname);
-        password = (EditText) findViewById(R.id.edit_benutzer_passwort);
-        vorname = (EditText) findViewById(R.id.edit_benutzer_vorname);
-        benutzername = (EditText) findViewById(R.id.edit_benutzername);
-        gruppe = (Spinner) findViewById(R.id.edit_benutzer_gruppe);
+        id = findViewById(R.id.edit_benutzer_id);
+        name = findViewById(R.id.edit_benutzer_nachname);
+        password = findViewById(R.id.edit_benutzer_passwort);
+        vorname = findViewById(R.id.edit_benutzer_vorname);
+        benutzername = findViewById(R.id.edit_benutzername);
+        gruppe = findViewById(R.id.edit_benutzer_gruppe);
+
+        GetUser();
     }
 
     public void edit_edit(View v){
@@ -74,6 +87,49 @@ public class EditUserActivity extends AppCompatActivity {
         }
         BackGround b = new BackGround();
         b.execute(Id, Name, Vorname,Benutzername,Password,Gruppe);
+    }
+
+    private void GetUser(){
+        UserWebService webService = UserWebService.retrofit.create(UserWebService.class);
+        Call<User> call = webService.user(userID);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                user = response.body();
+                DisplayData();
+                System.out.println(response.code());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+
+    private void DisplayData(){
+        if(user!=null){
+            id.setText(user.getId());
+            name.setText(user.getNachname());
+            vorname.setText(user.getVorname());
+            benutzername.setText(user.getUsername());
+            password.setText(user.getPasswort());
+            switch (user.getGruppe()){
+                case "1":{
+                    gruppe.setSelection(0);
+                    break;
+                }
+                case "2":{
+                    gruppe.setSelection(1);
+                    break;
+                }
+                case "3":{
+                    gruppe.setSelection(2);
+                    break;
+                }
+            }
+
+        }
     }
 
     class BackGround extends AsyncTask<String, String, String> {
