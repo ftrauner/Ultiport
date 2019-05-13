@@ -38,8 +38,6 @@ public class AddRequestActivity extends AppCompatActivity {
 
     Context ctx = this;
 
-    String GEBAUEDEGRUPPE;
-
     ArrayList<String> oeBez = new ArrayList<>();
     ArrayList<String>oeRaum =  new ArrayList<>();
 
@@ -147,7 +145,6 @@ public class AddRequestActivity extends AppCompatActivity {
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject jsonObject = jArray.getJSONObject(i);
                     // add interviewee name to arraylist
-                    GEBAUEDEGRUPPE = jsonObject.getString("oe_bez");
                     SpinnerList.add(jsonObject.getString("oe_bez"));
                     //SpinnerRoomList.add(jsonObject.getString("reqStartRaum"));
 
