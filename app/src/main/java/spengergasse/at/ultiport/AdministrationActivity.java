@@ -89,6 +89,7 @@ public class AdministrationActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+                popupMenu.show();
             }
         }));
 
