@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/item_edit_user"
+        android:icon="@drawable/ic_edit"
+        android:title="@string/admin_edit_user" />
+    <item android:id="@+id/item_delete_user"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/admin_remove_user" />
+</menu>

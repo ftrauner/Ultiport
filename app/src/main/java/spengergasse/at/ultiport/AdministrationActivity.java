@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -24,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import spengergasse.at.ultiport.adapter.RecyclerItemClickListener;
 import spengergasse.at.ultiport.adapter.UserAdapter;
 import spengergasse.at.ultiport.entities.User;
 
@@ -54,9 +57,40 @@ public class AdministrationActivity extends AppCompatActivity {
         bView.setHasFixedSize(true);
         bView.setLayoutManager(new LinearLayoutManager(this));
 
+
         userList = new ArrayList<>();
 
         getUserData();
+
+        bView.addOnItemTouchListener(new RecyclerItemClickListener(this, bView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+            @Override
+            public void onLongItemClick(View view, int position) {
+                PopupMenu popupMenu = new PopupMenu(AdministrationActivity.this,view);
+                popupMenu.getMenuInflater().inflate(R.menu.user_popup_menu,popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()){
+                            case R.id.item_edit_user: {
+                                Intent intent = new Intent(AdministrationActivity.this, EditUserActivity.class);
+                                startActivity(intent);
+                                break;
+                            }
+                            case R.id.item_delete_user: {
+                                Intent intent = new Intent(AdministrationActivity.this, DeleteUserActivity.class);
+                                startActivity(intent);
+                                break;
+                            }
+                        }
+                        return false;
+                    }
+                });
+            }
+        }));
 
         //UserAdapter mAdapter = new UserAdapter()
         //UserAdapter userAdapter = new UserAdapter(***userliste***);
@@ -137,6 +171,7 @@ public class AdministrationActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             }
+            /*
             //Benutzer bearbeiten wird geklickt
             case R.id.action_edit_user: {
                 Intent intent = new Intent(this, EditUserActivity.class);
@@ -149,6 +184,7 @@ public class AdministrationActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             }
+            */
             //Zurück-Pfeil wird geklickt
             case android.R.id.home: {
                 onBackPressed();
