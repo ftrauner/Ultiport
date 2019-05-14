@@ -25,5 +25,5 @@ public interface UserWebService {
             .build();
 
     @GET(USER_GET)
-    Call<User> user(@Query("id") int id);
+    Call<User> user(@Query("id") String id);
 }

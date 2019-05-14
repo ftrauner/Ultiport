@@ -16,9 +16,10 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        tools:targetApi="lollipop" />
+        tools:targetApi="lollipop"
+        tools:ignore="MissingConstraints" />
 
-    <EditText
+    <TextView
         android:id="@+id/edit_benutzer_id"
         android:layout_width="368dp"
         android:layout_height="wrap_content"

@@ -88,6 +88,7 @@ public class AdministrationActivity extends AppCompatActivity {
                         switch (menuItem.getItemId()){
                             case R.id.item_edit_user: {
                                 Intent intent = new Intent(AdministrationActivity.this, EditUserActivity.class);
+                                String hi = userList.get(position).getId();
                                 intent.putExtra("selectedID",userList.get(position).getId());
                                 startActivity(intent);
                                 break;
@@ -98,6 +99,7 @@ public class AdministrationActivity extends AppCompatActivity {
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 BackGround b = new BackGround();
+                                                String hi = userList.get(position).getId();
                                                 b.execute(userList.get(position).getId());
                                             }
 

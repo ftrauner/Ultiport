@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -30,10 +31,11 @@ import spengergasse.at.ultiport.service.UserWebService;
 public class EditUserActivity extends AppCompatActivity {
 
     User user;
-    EditText  id, name, password, vorname, benutzername;
+    EditText  name, password, vorname, benutzername;
+    TextView id;
     Spinner gruppe;
     String Id,Name, Password, Vorname, Benutzername, Gruppe;
-    int userID;
+    String userID;
     Context ctx=this;
 
     @Override
@@ -42,7 +44,7 @@ public class EditUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_user);
 
         Intent intent = getIntent();
-        userID = intent.getIntExtra("selectedID",0);
+        userID =  intent.getStringExtra("selectedID");
 
         Toolbar deleteUserToolbar = findViewById(R.id.edit_user_toolbar);
         setSupportActionBar(deleteUserToolbar);
@@ -50,12 +52,12 @@ public class EditUserActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        //Spinner spinner = findViewById(R.id.edit_benutzer_gruppe);
+        Spinner spinner = findViewById(R.id.edit_benutzer_gruppe);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.numbers, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //spinner.setAdapter(adapter);
+        spinner.setAdapter(adapter);
 
 
         id = findViewById(R.id.edit_benutzer_id);
@@ -113,8 +115,10 @@ public class EditUserActivity extends AppCompatActivity {
             name.setText(user.getNachname());
             vorname.setText(user.getVorname());
             benutzername.setText(user.getUsername());
+
             password.setText(user.getPasswort());
-            switch (user.getGruppe()){
+
+            switch ((user.getGruppe())){
                 case "1":{
                     gruppe.setSelection(0);
                     break;
