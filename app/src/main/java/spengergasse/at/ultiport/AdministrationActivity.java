@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -191,7 +192,7 @@ public class AdministrationActivity extends AppCompatActivity {
 
                             //creating adapter object and setting it to recyclerview
                             UserAdapter adapter = new UserAdapter(AdministrationActivity.this,userList);
-                            TextView textView = findViewById(R.id.user_gruppe);
+                            ImageView textView = findViewById(R.id.user_gruppe);
                             bView.setAdapter(adapter);
 
                         } catch (JSONException e) {
