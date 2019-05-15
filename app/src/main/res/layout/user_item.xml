@@ -11,7 +11,7 @@
    >
 
     <ImageView
-        android:id="@+id/user_bild"
+        android:id="@+id/user_gruppe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/request_art_desc" />
@@ -37,13 +37,14 @@
         android:textSize="20sp"
         android:padding="3dp"/>
 
+    <!-->
     <TextView
         android:id="@+id/user_gruppe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:padding="3dp"/>
-
+    <-->
 
 
     <!-->
