@@ -4,7 +4,7 @@
     <item
         android:id="@+id/action_add_user"
         android:title="@string/toolbar_add_user" />
-
+    <!-->
     <item
         android:id="@+id/action_edit_user"
         android:title="@string/toolbar_edit_user" />
@@ -12,6 +12,8 @@
     <item
         android:id="@+id/action_delete_user"
         android:title="@string/toolbar_delete_user" />
+    <-->
+
     <item
         android:id="@+id/user_aktualisieren"
         android:title="@string/admin_list"

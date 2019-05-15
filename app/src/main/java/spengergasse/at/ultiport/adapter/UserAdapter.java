@@ -2,10 +2,12 @@ package spengergasse.at.ultiport.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -21,7 +23,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     //Interne User-Liste
     private Context mCtx;
     private List<User> mUsers;
-    private int i = 0;
+    //private int i = 0;
 
     public UserAdapter(Context mCtx, List<User> mUsers){
         this.mCtx = mCtx;
@@ -58,15 +60,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         User user = mUsers.get(position);
         holder.vorname.setText(user.getVorname());
         holder.nachname.setText(user.getNachname());
-        if(user.getGruppe().equals("1")){
-            holder.gruppe.setText("Admin");
+
+        if(user.getGruppe().equals("1")) {
+            holder.gruppe.setImageDrawable(mCtx.getResources().getDrawable(R.drawable.ic_admin));
         }
         if(user.getGruppe().equals("2")){
-            holder.gruppe.setText("Requester");
+            holder.gruppe.setImageDrawable(mCtx.getResources().getDrawable(R.drawable.ic_requester));
         }
         if(user.getGruppe().equals("3")){
-            holder.gruppe.setText("Transporteur");
+            holder.gruppe.setImageDrawable(mCtx.getResources().getDrawable(R.drawable.ic_transporteur));
         }
+
         holder.id.setText(user.getId());
         //holder.gruppe.setText(user.getGruppe());
     }
