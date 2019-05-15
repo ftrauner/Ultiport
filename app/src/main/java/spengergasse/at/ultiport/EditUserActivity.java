@@ -76,11 +76,11 @@ public class EditUserActivity extends AppCompatActivity {
         Password = password.getText().toString();
         Vorname = vorname.getText().toString();
         Benutzername = benutzername.getText().toString();
-        if(gruppe.getSelectedItem().toString().equals("Admin")){
+        if(gruppe.getSelectedItem().toString().equals("Administrator")){
             Gruppe = "1";
         }
 
-        if(gruppe.getSelectedItem().toString().equals("Requester")){
+        if(gruppe.getSelectedItem().toString().equals("Anforderer")){
             Gruppe = "2";
         }
 
