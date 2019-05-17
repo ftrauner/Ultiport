@@ -102,6 +102,8 @@ public class AdministrationActivity extends AppCompatActivity {
                                                 BackGround b = new BackGround();
                                                 String hi = userList.get(position).getId();
                                                 b.execute(userList.get(position).getId());
+                                                Intent i = new Intent(AdministrationActivity.this,AdministrationActivity.class);
+                                                startActivity(i);
                                             }
 
                                             class BackGround extends AsyncTask<String, String, String> {
